@@ -46,7 +46,9 @@ char	*ft_puspaces(char *av)
 		}
 		i++;
 	}
-	return(new_str + 1);
+	if(*new_str == 32 || (*new_str >= 9 && *new_str <= 13))
+		*new_str++;
+	return(new_str);
 }
 
 int main()
