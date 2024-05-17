@@ -68,6 +68,6 @@ char	*ft_puspaces(char *av)
 
 int main()
 { 
-	char *str = "                   heloo               kak    ' ls cat      gg     k        laak    llll  llll   ";
+	char *str = "                   heloo               kak    ' ls cat      gg \"    k        laak    llll  llll   ";
 	printf("===%s\n", ft_puspaces(str));
 }
