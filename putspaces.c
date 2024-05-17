@@ -34,10 +34,18 @@ char	*ft_puspaces(char *av)
 		i++;
 	while(av[i])
 	{
-		if(av[i] == 39 || av[i] == 34)
+		if(av[i] == 39)
 		{
 			new_str[j++] = av[i++];
-			while(av[i] != 39 && av[i] != 34 && av[i])
+			while(av[i] != 39 && av[i])
+				new_str[j++] = av[i++];
+			if(!av[i])
+				(write(2, "syntax error!\n", 15), exit(1));
+		}
+		if(av[i] == 34)
+		{
+			new_str[j++] = av[i++];
+			while(av[i] != 34 && av[i])
 				new_str[j++] = av[i++];
 			if(!av[i])
 				(write(2, "syntax error!\n", 15), exit(1));
@@ -60,6 +68,6 @@ char	*ft_puspaces(char *av)
 
 int main()
 { 
-	char *str = "                   heloo               'kak     ls cat '     gg     k        laak    llll  llll   ";
+	char *str = "                   heloo               kak    ' ls cat      gg     k        laak    llll  llll   ";
 	printf("===%s\n", ft_puspaces(str));
 }
