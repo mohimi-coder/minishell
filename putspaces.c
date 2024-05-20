@@ -11,9 +11,56 @@ int ft_strlen(char *str)
         i++;
     return i;
 }
+void	ft_error_message(char *mess)
+{
+	write (2, mess, ft_strlen(mess));
+	write (2, "\n", 1);
+	exit(1);
+}
 bool ft_operations(char c)
 {
 	return (c == '|' || c == '<' || c == '>');
+}
+bool ft_error_operation(char c)
+{
+	return(c == '&' || c == ';' || c == 92);
+}
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n && (s1[i] != '\0' || s2[i] != '\0'))
+	{
+		if ((unsigned char) s1[i] != (unsigned char) s2[i])
+			return ((unsigned char) s1[i] - (unsigned char) s2[i]);
+		i++;
+	}
+	return (0);
+}
+
+void	ft_operation_handller(char *new_str)
+{
+	int i;
+
+	i = 0;
+	while(new_str[i])
+	{
+		if(!ft_strncmp(new_str + i, "<<<", 3) || !ft_strncmp(new_str + i, ">>>", 3))
+			ft_error_message("syntax error near unexpected token");
+		if(ft_error_operation(new_str[i]))
+			ft_error_message("syntax error!");
+		if(ft_operations(new_str[i]))
+		{
+			if (new_str[i] == '<' && new_str[i + 1] == '|')
+				ft_error_message("syntax error near unexpected token");
+			if(new_str[i] == '>' && new_str[i + 1] == '<')
+				ft_error_message("syntax error near unexpected token");
+			if(new_str[i] == '|' && new_str[i + 1] == '|')
+				ft_error_message("syntax error near unexpected token");
+		}
+		i++;
+	}
 }
 
 int ft_count_lenght(char *str)
@@ -95,7 +142,7 @@ void handle_quotes(char *av)
 			while (av[i] != 39 && av[i])
 				i++;
 			if (!av[i])
-				write(2, "syntax error!\n", 15), exit(1);
+				ft_error_message("syntax error!");
 		}
 		else if (av[i] == 34)
 		{
@@ -103,7 +150,7 @@ void handle_quotes(char *av)
 			while (av[i] != 34 && av[i])
 				i++;
 			if (!av[i])
-				write(2, "syntax error!\n", 15), exit(1);
+				ft_error_message("syntax error!");
 		}
 		i++;
 	}
@@ -113,6 +160,7 @@ char	*ft_puspaces(char *av)
 {
 	char	*avv;
 
+	ft_operation_handller(av);
 	avv = ft_operation_spaces(av);
 	handle_quotes(avv);
 	printf("%s", avv);
