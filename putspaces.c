@@ -49,7 +49,7 @@ void	ft_operation_handller(char *new_str)
 		if(!ft_strncmp(new_str + i, "<<<", 3) || !ft_strncmp(new_str + i, ">>>", 3))
 			ft_error_message("syntax error near unexpected token");
 		if(ft_error_operation(new_str[i]))
-			ft_error_message("syntax error!");
+			ft_error_message("syntax error: special characters!");
 		if(ft_operations(new_str[i]))
 		{
 			if (new_str[i] == '<' && new_str[i + 1] == '|')
@@ -142,7 +142,7 @@ void handle_quotes(char *av)
 			while (av[i] != 39 && av[i])
 				i++;
 			if (!av[i])
-				ft_error_message("syntax error!");
+				ft_error_message("syntax error: unclosed quotes!");
 		}
 		else if (av[i] == 34)
 		{
@@ -150,7 +150,7 @@ void handle_quotes(char *av)
 			while (av[i] != 34 && av[i])
 				i++;
 			if (!av[i])
-				ft_error_message("syntax error!");
+				ft_error_message("syntax error: unclosed quotes!");
 		}
 		i++;
 	}
