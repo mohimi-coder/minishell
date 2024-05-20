@@ -42,6 +42,8 @@ char *allocate(char *av)
 	int		i;
 	int		j;
 
+	i = 0;
+	j = 0;
 	len = ft_strlen(av);
 	new_str = malloc(len + 1);
 	if (!new_str)
@@ -51,7 +53,7 @@ char *allocate(char *av)
 	return (new_str);
 }
 
-char *ft_operation_spacese(char *str)
+char *ft_operation_spaces(char *str)
 {
 	int i;
 	int j;
@@ -62,6 +64,8 @@ char *ft_operation_spacese(char *str)
 	j = 0;
 	len = ft_count_lenght(str);
 	dest = malloc(len + 1);
+	if (!dest)
+		return (NULL);
 	while(str[i] && j < len)
 	{
 		if(ft_operations(str[i]))
@@ -77,73 +81,49 @@ char *ft_operation_spacese(char *str)
 		i++;
 	}
 	dest[j] = '\0';
-	printf("===%s\n", dest);
 	return(dest);
 }
-void handle_quotes(char *av, char *new_str, int *i, int *j)
+void handle_quotes(char *av)
 {
-	if (av[*i] == 39)
+	int i = 0;
+	int j = 0;
+	while(av[i])
 	{
-		new_str[(*j)++] = av[(*i)++];
-		while (av[*i] != 39 && av[*i])
-			new_str[(*j)++] = av[(*i)++];
-		if (!av[*i])
-			write(2, "syntax error!\n", 15), exit(1);
+		if (av[i] == 39)
+		{
+			i++;
+			while (av[i] != 39 && av[i])
+				i++;
+			if (!av[i])
+				write(2, "syntax error!\n", 15), exit(1);
+		}
+		else if (av[i] == 34)
+		{
+			i++;
+			while (av[i] != 34 && av[i])
+				i++;
+			if (!av[i])
+				write(2, "syntax error!\n", 15), exit(1);
+		}
+		i++;
 	}
-	if (av[*i] == 34)
-	{
-		new_str[(*j)++] = av[(*i)++];
-		while (av[*i] != 34 && av[*i])
-			new_str[(*j)++] = av[(*i)++];
-		if (!av[*i])
-			write(2, "syntax error!\n", 15), exit(1);
-	}
-	while (av[*i] != ' ' && !(av[*i] >= 9 && av[*i] <= 13) && av[*i])
-		new_str[(*j)++] = av[(*i)++];
-}
-void	skip_spaces(char *av, int *i)
-{
-	while (av[*i] == ' ' || (av[*i] >= 9 && av[*i] <= 13))
-		(*i)++;
-}
-
-void handle_spaces(char *av, char *new_str, int *i, int *j)
-{
-	int c;
-
-	while ((av[*i] == ' ' || (av[*i] >= 9 && av[*i] <= 13)) && av[*i])
-	{
-		c = 1;
-		(*i)++;
-	}
-	if (c == 1 && av[*i])
-		new_str[(*j)++] = ' ';
 }
 
 char	*ft_puspaces(char *av)
 {
-	char	*new_str;
-	int		i;
-	int		j;
+	char	*avv;
 
-	i = 0;
-	j = 0;
-	new_str = allocate(av);
-	if (!new_str)
-		return NULL;
-	skip_spaces(av, &i);
-	while (av[i])
-	{
-		handle_quotes(av, new_str, &i, &j);
-		handle_spaces(av, new_str, &i, &j);
-	}
-	return new_str;
+	avv = ft_operation_spaces(av);
+	handle_quotes(avv);
+	printf("%s", avv);
+	return avv;
 }
 
 int main(int ac, char **av)
 {
 	// char *str = "       '  ls -la'   cat|>out      'echo('hello')      $     USER   ";
-	ft_operation_spacese(av[1]);
+	// ft_operation_spacese(av[1]);
 	// char *l = ft_puspaces(str);
+	ft_puspaces(av[1]);
 	// printf("-> %s", l);
 }
