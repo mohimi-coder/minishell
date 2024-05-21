@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:50:53 by mohimi            #+#    #+#             */
-/*   Updated: 2024/05/21 17:30:31 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/21 19:15:03 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,45 +32,51 @@ void	skip_space(char *str, int *i)
 		(*i)++;
 }
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+void	out_redir(char *av, t_token **token, int *i)
 {
-	char	*str;
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (NULL);
-	if (start >= ft_strlen(s))
-		len = 0;
-	if (len > ft_strlen(s) - start)
-		len = ft_strlen(s) - start;
-	str = (char *)malloc(len + 1);
-	if (!str)
-		return (NULL);
-	while (i < len)
+	if (!av[*i + 1])
+		return ;
+	if (av[*i + 1] == '>')
 	{
-		str[i] = s[start];
-		i++;
-		start++;
+		add_back(token, ft_lstnew(APPEND_OUT, ft_strdup(">>")));
+		(*i)++;
 	}
-	str[i] = '\0';
-	return (str);
+	else
+		add_back(token, ft_lstnew(OUT, ft_strdup(">")));
+	(*i)++;
 }
 
-char	*ft_strdup(char *s1)
+void	in_redir(char *av, t_token **token, int *i)
 {
-	char	*ptr;
-	size_t	i;
-
-	i = 0;
-	ptr = (char *)malloc(ft_strlen(s1) + 1);
-	if (!ptr)
-		return (NULL);
-	while (s1[i])
+	if (!av[*i + 1])
+		return ;
+	if (av[*i + 1] == '<')
 	{
-		ptr[i] = s1[i];
-		i++;
+		add_back(&token, ft_lstnew(HER_DOC, ft_strdup("<<")));
+		(*i)++;
 	}
-	ptr[i] = '\0';
-	return (ptr);
+	else
+		add_back(&token, ft_lstnew(IN, ft_strdup("<")));
+	(*i)++;
+}
+
+void	pipe_word(char *av, t_token **token, int *i)
+{
+	int	start;
+
+	if (av[*i] == '|')
+	{
+		add_back(token, ft_lstnew(PIPE, ft_strdup("|")));
+		(*i)++;
+	}
+	else
+	{
+		start = *i;
+		while (av[*i] && av[*i] != '|' && av[*i] != '<' && av[*i] != '>'
+			&& av[*i] != '$' && av[*i] != 39 && av[*i] != 34
+			&& av[*i] != 32 && !(av[*i] >= 9 && av[*i] <= 13))
+			(*i)++;
+		add_back(&token, ft_lstnew(WORD,
+				ft_strdup(ft_substr(av, start, *i - start))));
+	}
 }

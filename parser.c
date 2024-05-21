@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:25:07 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/21 17:43:37 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/21 20:34:37 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,23 @@ int	ft_count_lenght(char *str)
 	return (len);
 }
 
-char	*allocate(char *av)
-{
-	int		len;
-	char	*new_str;
-	int		i;
-	int		j;
+// char	*allocate(char *av)
+// {
+// 	int		len;
+// 	char	*new_str;
+// 	int		i;
+// 	int		j;
 
-	i = 0;
-	j = 0;
-	len = ft_strlen(av);
-	new_str = malloc(len + 1);
-	if (!new_str)
-		return (NULL);
-	while (j <= len)
-		new_str[j++] = '\0';
-	return (new_str);
-}
+// 	i = 0;
+// 	j = 0;
+// 	len = ft_strlen(av);
+// 	new_str = malloc(len + 1);
+// 	if (!new_str)
+// 		return (NULL);
+// 	while (j <= len)
+// 		new_str[j++] = '\0';
+// 	return (new_str);
+// }
 
 char	*ft_operation_spaces(char *str)
 {
@@ -106,7 +106,7 @@ char	*ft_operation_spaces(char *str)
 	return (dest[v.j] = '\0', dest);
 }
 
-void	handle_quotes(char *av, int *i, t_token **token)
+void	handle_quotes(char *av, t_token **token, int *i)
 {
 	int	start;
 
@@ -118,6 +118,8 @@ void	handle_quotes(char *av, int *i, t_token **token)
 			(*i)++;
 		if (!av[*i])
 			(ft_lst_clear(token), ft_error_message("unclosed quotes!"));
+		add_back(token, ft_lstnew(SINGLE_QUOTE,
+				ft_substr(av, start, *i - start + 1)));
 	}
 	else if (av[*i] == 34)
 	{
@@ -126,5 +128,36 @@ void	handle_quotes(char *av, int *i, t_token **token)
 			(*i)++;
 		if (!av[*i])
 			(ft_lst_clear(token), ft_error_message("unclosed quotes!"));
+		add_back(token, ft_lstnew(DOUBLE_QUOTES,
+				ft_substr(av, start, *i - start + 1)));
 	}
+}
+
+void	handle_dollar(char *av, int *i, t_token **token)
+{
+	int	start;
+
+	start = *i;
+	if (av[*i + 1] && (av[*i + 1] == '$' || av[*i + 1] == '?'))
+	{
+		if (av[*i + 1] == '$')
+			add_back(token, ft_lstnew(DOUBLE_DOLLAR, ft_strdup("$$")));
+		else
+			add_back(token, ft_lstnew(DOLLAR_WHY, ft_substr(av, start, 2)));
+		(*i) += 2;
+	}
+	else if (av[*i + 1] && (ft_isalnum(av[*i + 1]) || av[*i + 1] == '_'))
+	{
+		if (av[*i + 1] >= '0' && av[*i + 1] <= '9')
+		{
+			add_back(token, ft_lstnew(VAR, ft_substr(av, start, 2)));
+			(*i) += 2;
+			return ;
+		}
+		while (av[*i + 1] && (ft_isalnum(av[*i + 1]) || av[*i + 1] == '_'))
+			(*i)++;
+		add_back(token, ft_lstnew(VAR, ft_substr(av, start, *i - start)));
+	}
+	else if (av[*i + 1] && (av[*i + 1] == 39 || av[*i + 1] == 34))
+		(*i)++;
 }

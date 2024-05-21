@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   putspaces.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:44:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/21 17:44:57 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/21 20:26:10 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// void	handle_dollar(char *av, int *i, t_token **token)
-// {
-// 	int	counter;
-// 	int	len;
-// 	int	start;
-
-// 	(1 == 1) && (len = 0, start = 0, counter = 0);
-// 	while (av[*i] == '$' && av[*i])
-// 	{
-// 		(*i)++;
-// 		counter++;
-// 	}
-// 	if (counter % 2 == 0)
-// }
 
 char	*ft_puspaces(char *av)
 {
@@ -38,27 +23,18 @@ char	*ft_puspaces(char *av)
 	skip_space(av, &i);
 	while (av[i])
 	{
-		if ((av[i] == ' ' || (av[i] >= 9 && av[i] <= 13)) && av[i])
+		if ((av[i] == ' ' || (av[i] >= 9 && av[i] <= 13)))
 			handle_spaces(av, &token, &i);
-		if ((av[i] == 39 || av[i] == 34) && av[i])
+		else if ((av[i] == 39 || av[i] == 34))
 			handle_quotes(av, &token, &i);
-		if (av[i] == '$' && av[i])
+		else if (av[i] == '$')
 			handle_dollar(av, &token, &i);
-		if (av[i] == '>' && av[i + 1] == '>')
-			add_back(&token, ft_lstnew(ARED_OUT, ft_strdup(">>")));
-		if (av[i] == '<' && av[i + 1] == '<')
-			add_back(&token, ft_lstnew(HER_DOC, ft_strdup("<<")));
-		if (av[i] == '>' && av[i + 1] != '>')
-			add_back(&token, ft_lstnew(RED_OUT, ft_strdup(">")));
-		if (av[i] == '<' && av[i + 1] != '<')
-			add_back(&token, ft_lstnew(RED_IN, ft_strdup("<")));
-		if (av[i] == '|' && av[i])
-			add_back(&token, ft_lstnew(PIPE, ft_strdup("|")));
-		if (av[i] != ' ' && av[i] != 39 && av[i] != 34 && av[i] != '$' \
-			&& av[i] != '>' && av[i] != '<' && av[i] != '|')
-			add_back(&token, ft_lstnew(WORDS, \
-				ft_strdup(ft_substr(av, i, 1))));
-		i++;
+		else if (av[i] == '>')
+			out_redir(av, &token, &i);
+		else if (av[i] == '<')
+			in_redir(av, &token, &i);
+		else
+			pipe_word(av, &token, &i);
 	}
 	ft_operation_handller(av);
 	avv = ft_operation_spaces(av);
