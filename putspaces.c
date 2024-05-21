@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   putspaces.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:44:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/20 18:52:33 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/05/21 09:57:06 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ char	*ft_puspaces(char *av)
 	ft_operation_handller(av);
 	avv = ft_operation_spaces(av);
 	handle_quotes(avv);
-	printf("%s\n", avv);
 	sp = ft_split(avv, '|');
 	while (sp[i])
 	{
@@ -32,12 +31,32 @@ char	*ft_puspaces(char *av)
 	return (avv);
 }
 
+void	minishell_loop(char *input)
+{
+	while (1)
+	{
+		input = readline(PINK "➜  Shell-2.4$ " RESET);
+		if (!input)
+			printf("exit\n"), exit(0);
+		else if (ft_strncmp(input, "exit", 4) == 0)
+			printf("exit\n"), exit(0);
+		// else if (input[0] == '\0' )
+		// 	continue;
+		ft_puspaces(input);
+		add_history(input);
+	}
+}
+
 int	main(int ac, char **av)
 {
-	// char *str = "       '  ls -la'   cat|>out      'echo('hello')      $     USER   ";
-	// ft_operation_spacese(av[1]);
-	// char *l = ft_puspaces(str);
-	if (ac > 1)
-		ft_puspaces(av[1]);
-	// printf("-> %s", l);
+	char	*str = NULL;
+
+	if (ac != 1 || av[1])
+	{
+		printf("Error\n");
+		exit(0);
+	}
+	printf(ORANGE "Welcome to our minishell!!\n" RESET);
+	minishell_loop(str);
+	return (0);
 }

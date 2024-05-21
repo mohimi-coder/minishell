@@ -3,25 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/20 18:27:21 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/05/21 10:02:46 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
-# define MINISHELL_H 
+# define MINISHELL_H
 
-# include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <sys/wait.h>
+# include <fcntl.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <limits.h>
 # include <stdbool.h>
-# include <stdio.h> 
 
-# ifndef BUFFER_SIZE 
-#  define BUFFER_SIZE 2
-# endif
+/*--------------------------------------- colors---------------------------------------------*/
+# define RED "\x1b[31m"
+# define GREEN "\x1b[32m"
+# define YELLOW "\x1b[33m"
+# define BLUE "\x1b[34m"
+# define MAGENTA "\x1b[35m"
+# define CYAN "\x1b[36m"
+# define PINK "\x1b[95m"
+# define RESET "\x1b[0m"
+# define ORANGE "\x1b[38;5;214m"
+
+// # ifndef BUFFER_SIZE
+// #  define BUFFER_SIZE 2
+// # endif
 
 typedef struct var
 {

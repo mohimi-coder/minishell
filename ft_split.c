@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:38:20 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/20 18:11:33 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/05/21 09:43:09 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_substr(char *s, unsigned int start, int len)
+char	*ft_substr(char *s, int start, int len)
 {
 	char	*str;
 	int		i;
