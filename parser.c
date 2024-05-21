@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:25:07 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/20 18:25:51 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/05/21 17:43:37 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,29 +106,25 @@ char	*ft_operation_spaces(char *str)
 	return (dest[v.j] = '\0', dest);
 }
 
-void	handle_quotes(char *av)
+void	handle_quotes(char *av, int *i, t_token **token)
 {
-	t_var	v;
+	int	start;
 
-	v.i = -1;
-	v.j = 0;
-	while (av[++v.i])
+	start = *i;
+	if (av[*i] == 39)
 	{
-		if (av[v.i] == 39)
-		{
-			v.i++;
-			while (av[v.i] != 39 && av[v.i])
-				v.i++;
-			if (!av[v.i])
-				ft_error_message("syntax error: unclosed quotes!");
-		}
-		else if (av[v.i] == 34)
-		{
-			v.i++;
-			while (av[v.i] != 34 && av[v.i])
-				v.i++;
-			if (!av[v.i])
-				ft_error_message("syntax error: unclosed quotes!");
-		}
+		(*i)++;
+		while (av[*i] != 39 && av[*i])
+			(*i)++;
+		if (!av[*i])
+			(ft_lst_clear(token), ft_error_message("unclosed quotes!"));
+	}
+	else if (av[*i] == 34)
+	{
+		(*i)++;
+		while (av[*i] != 34 && av[*i])
+			(*i)++;
+		if (!av[*i])
+			(ft_lst_clear(token), ft_error_message("unclosed quotes!"));
 	}
 }
