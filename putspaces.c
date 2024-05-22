@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:44:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/22 14:44:05 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/22 16:41:38 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,15 @@ char	*ft_puspaces(char *av)
 		else
 			pipe_word(av, &token, &i);
 	}
-	t_token *tmp;
+	t_token	*tmp;
+
 	tmp = token;
-	while(tmp)
+	while (tmp)
 	{
 		printf("content== [%s]\n", tmp->content);
 		printf("type===== [%d]\n", tmp->type);
 		tmp = tmp->next;
 	}
-	// ft_operation_handller(av);
-	// avv = ft_operation_spaces(av);
-	// printf("%s\n", avv);
 	return (av);
 }
 
@@ -53,7 +51,7 @@ void	minishell_loop(char *input)
 {
 	while (1)
 	{
-		input = readline(PINK "➜  Shell-2.4$ " RESET);
+		input = readline(PINK "➜  Shell-2.4 ✗ " RESET);
 		if (!input)
 			(printf("exit\n"), exit(0));
 		else if (ft_strncmp(input, "exit", 4) == 0)

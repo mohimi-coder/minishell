@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:50:53 by mohimi            #+#    #+#             */
-/*   Updated: 2024/05/22 15:20:48 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/22 16:04:44 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	pipe_word(char *av, t_token **token, int *i)
 			&& av[*i] != '$' && av[*i] != 39 && av[*i] != 34
 			&& av[*i] != 32 && !(av[*i] >= 9 && av[*i] <= 13))
 			(*i)++;
-		add_back(token, ft_lstnew(WORD,
+		add_back(token, ft_lstnew(WORD, \
 			ft_strdup(ft_substr(av, start, *i - start))));
 	}
 }
