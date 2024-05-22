@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   libft_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:21:21 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/21 19:32:59 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/05/21 22:13:39 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, int start, int len)
 {
 	char	*str;
-	size_t	i;
+	int		i;
 
 	i = 0;
 	if (!s)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/21 20:24:53 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/05/21 22:13:09 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,9 @@ void	handle_dollar(char *av, int *i, t_token **token);
 //libft_helper
 int		ft_strlen(char *str);
 int		ft_strncmp(const char *s1, const char *s2, int n);
-char	*ft_substr(char *s, unsigned int start, size_t len);
+char	*ft_substr(char *s, int start, int len);
 char	*ft_strdup(char *s1);
+int		ft_isalnum(int a);
 //linked list
 t_token	*ft_lstnew(int type, char *content);
 void	add_back(t_token **lst, t_token *new);

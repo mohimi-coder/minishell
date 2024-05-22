@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:50:53 by mohimi            #+#    #+#             */
-/*   Updated: 2024/05/21 19:15:03 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/05/22 15:20:48 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ void	skip_space(char *str, int *i)
 
 void	out_redir(char *av, t_token **token, int *i)
 {
-	if (!av[*i + 1])
-		return ;
-	if (av[*i + 1] == '>')
+	if (av[*i + 1] && av[*i + 1] == '>')
 	{
 		add_back(token, ft_lstnew(APPEND_OUT, ft_strdup(">>")));
 		(*i)++;
@@ -48,15 +46,13 @@ void	out_redir(char *av, t_token **token, int *i)
 
 void	in_redir(char *av, t_token **token, int *i)
 {
-	if (!av[*i + 1])
-		return ;
-	if (av[*i + 1] == '<')
+	if (av[*i + 1] && av[*i + 1] == '<')
 	{
-		add_back(&token, ft_lstnew(HER_DOC, ft_strdup("<<")));
+		add_back(token, ft_lstnew(HER_DOC, ft_strdup("<<")));
 		(*i)++;
 	}
 	else
-		add_back(&token, ft_lstnew(IN, ft_strdup("<")));
+		add_back(token, ft_lstnew(IN, ft_strdup("<")));
 	(*i)++;
 }
 
@@ -76,7 +72,7 @@ void	pipe_word(char *av, t_token **token, int *i)
 			&& av[*i] != '$' && av[*i] != 39 && av[*i] != 34
 			&& av[*i] != 32 && !(av[*i] >= 9 && av[*i] <= 13))
 			(*i)++;
-		add_back(&token, ft_lstnew(WORD,
-				ft_strdup(ft_substr(av, start, *i - start))));
+		add_back(token, ft_lstnew(WORD,
+			ft_strdup(ft_substr(av, start, *i - start))));
 	}
 }

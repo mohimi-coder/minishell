@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   putspaces.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:44:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/21 20:26:10 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/05/22 14:44:05 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ char	*ft_puspaces(char *av)
 {
 	t_token	*token;
 	int		i;
-	char	*avv;
 
 	token = NULL;
 	i = 0;
@@ -28,7 +27,7 @@ char	*ft_puspaces(char *av)
 		else if ((av[i] == 39 || av[i] == 34))
 			handle_quotes(av, &token, &i);
 		else if (av[i] == '$')
-			handle_dollar(av, &token, &i);
+			handle_dollar(av, &i, &token);
 		else if (av[i] == '>')
 			out_redir(av, &token, &i);
 		else if (av[i] == '<')
@@ -36,9 +35,18 @@ char	*ft_puspaces(char *av)
 		else
 			pipe_word(av, &token, &i);
 	}
-	ft_operation_handller(av);
-	avv = ft_operation_spaces(av);
-	return (avv);
+	t_token *tmp;
+	tmp = token;
+	while(tmp)
+	{
+		printf("content== [%s]\n", tmp->content);
+		printf("type===== [%d]\n", tmp->type);
+		tmp = tmp->next;
+	}
+	// ft_operation_handller(av);
+	// avv = ft_operation_spaces(av);
+	// printf("%s\n", avv);
+	return (av);
 }
 
 void	minishell_loop(char *input)
@@ -49,7 +57,7 @@ void	minishell_loop(char *input)
 		if (!input)
 			(printf("exit\n"), exit(0));
 		else if (ft_strncmp(input, "exit", 4) == 0)
-			printf("exit\n"), exit(0);
+			(printf("exit\n"), exit(0));
 		ft_puspaces(input);
 		add_history(input);
 	}
