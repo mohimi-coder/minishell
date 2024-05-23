@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:48:44 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/21 12:51:13 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/22 21:47:40 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_error_message(char *mess)
 {
 	write (2, mess, ft_strlen(mess));
 	write (2, "\n", 1);
-	exit(1);
+	return ;
 }
 
 int	ft_strncmp(const char *s1, const char *s2, int n)

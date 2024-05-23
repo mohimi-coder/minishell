@@ -2,7 +2,7 @@ cc = cc
 
 FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
-FILE = parser_utils.c parser_utils2.c parser.c putspaces.c lists.c libft_helper.c
+FILE = parser_utils.c parser_utils2.c parser.c putspaces.c lists.c libft_helper.c syntax_errors.c
 
 OBJECT_FILE = $(FILE:.c=.o)
 

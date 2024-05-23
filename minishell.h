@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/21 22:13:09 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/23 12:47:45 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 /*--------------------------------------- colors------------------------------*/
 # define PINK "\x1b[95m"
+# define RED "\x1b[31m"
 # define ORANGE "\x1b[38;5;214m"
 # define RESET "\x1b[0m"
 
@@ -59,7 +60,7 @@ typedef struct token
 	struct token	*next;
 
 }			t_token;
-//parser
+/*--------------------------lexer----------------------------*/
 char	**ft_split(char *s, char c);
 void	ft_error_message(char *mess);
 bool	ft_operations(char c);
@@ -75,15 +76,18 @@ void	out_redir(char *av, t_token **token, int *i);
 void	in_redir(char *av, t_token **token, int *i);
 void	pipe_word(char *av, t_token **token, int *i);
 void	handle_dollar(char *av, int *i, t_token **token);
-//libft_helper
+
+/*---------------------------- syntax error----------------------------*/
+void	pipe_errors(t_token *token);
+void	redirec_errors(t_token *token);
+/*---------------------------libft_helper-------------------------------*/
 int		ft_strlen(char *str);
 int		ft_strncmp(const char *s1, const char *s2, int n);
 char	*ft_substr(char *s, int start, int len);
 char	*ft_strdup(char *s1);
 int		ft_isalnum(int a);
-//linked list
+/*------------------------linked list-------------------------------*/
 t_token	*ft_lstnew(int type, char *content);
 void	add_back(t_token **lst, t_token *new);
 void	ft_lstclear(t_token **lst);
-
 #endif

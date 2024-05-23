@@ -6,13 +6,13 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:44:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/22 16:41:38 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/23 12:43:34 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_puspaces(char *av)
+void	ft_puspaces(char *av)
 {
 	t_token	*token;
 	int		i;
@@ -35,16 +35,9 @@ char	*ft_puspaces(char *av)
 		else
 			pipe_word(av, &token, &i);
 	}
-	t_token	*tmp;
-
-	tmp = token;
-	while (tmp)
-	{
-		printf("content== [%s]\n", tmp->content);
-		printf("type===== [%d]\n", tmp->type);
-		tmp = tmp->next;
-	}
-	return (av);
+	pipe_errors(token);
+	redirec_errors(token);
+	return ;
 }
 
 void	minishell_loop(char *input)
