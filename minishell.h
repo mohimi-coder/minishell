@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/23 12:47:45 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/23 17:08:57 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <limits.h>
-# include <stdbool.h>
 
 /*--------------------------------------- colors------------------------------*/
 # define PINK "\x1b[95m"
@@ -29,7 +28,7 @@
 # define ORANGE "\x1b[38;5;214m"
 # define RESET "\x1b[0m"
 
-/*=================================Tokenization===============================*/
+/*----------------------------------Tokenization-----------------------------*/
 
 # define WORD 1
 # define SPACE 2
@@ -52,7 +51,7 @@ typedef struct var
 	int		start;
 	int		count;
 }			t_var;
-
+/*--------------- tokens struct---------------------------------*/
 typedef struct token
 {
 	int				type;
@@ -63,12 +62,9 @@ typedef struct token
 /*--------------------------lexer----------------------------*/
 char	**ft_split(char *s, char c);
 void	ft_error_message(char *mess);
-bool	ft_operations(char c);
-bool	ft_error_operation(char c);
+int		ft_operations(char c);
+int		ft_error_operation(char c);
 void	ft_operation_handller(char *new_str);
-int		ft_count_lenght(char *str);
-char	*allocate(char *av);
-char	*ft_operation_spaces(char *str);
 void	handle_quotes(char *av, t_token **token, int *i);
 void	handle_spaces(char *av, t_token **token, int *i);
 void	skip_space(char *str, int *i);
@@ -78,8 +74,8 @@ void	pipe_word(char *av, t_token **token, int *i);
 void	handle_dollar(char *av, int *i, t_token **token);
 
 /*---------------------------- syntax error----------------------------*/
-void	pipe_errors(t_token *token);
-void	redirec_errors(t_token *token);
+int		pipe_errors(t_token *token);
+int		redirec_errors(t_token *token);
 /*---------------------------libft_helper-------------------------------*/
 int		ft_strlen(char *str);
 int		ft_strncmp(const char *s1, const char *s2, int n);

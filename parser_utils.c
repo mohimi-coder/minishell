@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:48:44 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/22 21:47:40 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/23 17:07:06 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ int	ft_strncmp(const char *s1, const char *s2, int n)
 	return (0);
 }
 
-bool	ft_operations(char c)
+int	ft_operations(char c)
 {
 	return (c == '|' || c == '<' || c == '>');
 }
 
-bool	ft_error_operation(char c)
+int	ft_error_operation(char c)
 {
 	return (c == '&' || c == ';' || c == 92);
 }

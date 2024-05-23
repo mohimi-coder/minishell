@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   putspaces.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:44:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/23 12:43:34 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/23 14:37:18 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	ft_puspaces(char *av)
 		else
 			pipe_word(av, &token, &i);
 	}
-	pipe_errors(token);
-	redirec_errors(token);
+	if (pipe_errors(token) || redirec_errors(token))
+		ft_error_message(RED "syntax error" RESET);
 	return ;
 }
 
