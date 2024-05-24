@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:25:07 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/24 22:30:36 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/24 22:48:12 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	handle_quotes(char *av, t_token **token, int *i)
 			(*i)++;
 		if (!av[*i])
 			(ft_lstclear(token), \
-				ft_error_message(RED "unclosed quotes📛" RESET));
+				ft_error_message(RED BOLD"➥  unclosed quotes📛" RESET));
 		add_back(token, ft_lstnew(SINGLE_QUOTE,
 				ft_substr(av, start + 1, ++(*i) - start - 2)));
 	}
@@ -35,7 +35,7 @@ void	handle_quotes(char *av, t_token **token, int *i)
 			(*i)++;
 		if (!av[*i])
 			(ft_lstclear(token), \
-				ft_error_message(RED "unclosed quotes📛" RESET));
+				ft_error_message(RED BOLD"➥  unclosed quotes 📛" RESET));
 		add_back(token, ft_lstnew(DOUBLE_QUOTES,
 				ft_substr(av, start + 1, ++(*i) - start - 2)));
 	}

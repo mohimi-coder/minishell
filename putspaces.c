@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:44:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/24 22:28:14 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/24 22:48:21 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_puspaces(char *av)
 			pipe_word(av, &token, &i);
 	}
 	if (pipe_errors(token) || redirec_errors(token))
-		ft_error_message(RED "➥ syntax error❗" RESET);
+		ft_error_message(RED BOLD "➥  syntax error❗" RESET);
 	return ;
 }
 
@@ -76,7 +76,7 @@ void	minishell_loop(char *input, char **env)
 	ft_fill_env(env, &enver);
 	while (1)
 	{
-		input = readline(PURPLE "╰┈➤  Shell-2.4 ✗ " RESET);
+		input = readline(PURPLE"╰┈➤ Shell-2.4 ✗ " RESET);
 		if (!input)
 			(printf("exit\n"), exit(0));
 		else if (ft_strncmp(input, "exit", 4) == 0)
@@ -96,7 +96,7 @@ int	main(int ac, char **av, char **env)
 		printf("Error\n");
 		exit(0);
 	}
-	printf(ORANGE "Welcome to our minishell 🤗\n" RESET);
+	printf(ORANGE BOLD"➤  Welcome to our minishell 🤗\n" RESET);
 	minishell_loop(str, env);
 	return (0);
 }
