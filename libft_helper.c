@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:21:21 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/21 22:13:39 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/24 12:34:32 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_strdup(char *s1)
 
 	i = 0;
 	ptr = (char *)malloc(ft_strlen(s1) + 1);
-	if (!ptr)
+	if (!ptr || !s1)
 		return (NULL);
 	while (s1[i])
 	{

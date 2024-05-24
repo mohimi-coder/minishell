@@ -6,118 +6,73 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:38:20 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/21 09:43:09 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/24 12:25:38 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_substr(char *s, int start, int len)
-{
-	char	*str;
-	int		i;
-
-	i = 0;
-	if (!s)
-		return (NULL);
-	if (start >= ft_strlen(s))
-		len = 0;
-	if (len > ft_strlen(s) - start)
-		len = ft_strlen(s) - start;
-	str = (char *)malloc(len + 1);
-	if (!str)
-		return (NULL);
-	while (i < len)
-	{
-		str[i] = s[start];
-		i++;
-		start++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
-int	ft_count(char *s, char c)
+static int	ft_countword(char const *str, char c)
 {
 	int	i;
 	int	count;
+	int	b;
 
 	i = 0;
 	count = 0;
-	while (s[i])
+	b = 0;
+	while (str[i])
 	{
-		if (s[i] && (s[i] == 39 || s[i] == 34))
+		if (str[i] != c && b == 0)
 		{
+			b = 1;
 			count++;
-			i++;
-			while (s[i] && (s[i] != 39 && s[i] != 34))
-				i++;
-			i++;
 		}
-		while (s[i] && s[i] == c)
-			i++;
-		if (s[i] && s[i] != c && (s[i] != 39 && s[i] != 34))
-			count ++;
-		while (s[i] && s[i] != c && (s[i] != 39 && s[i] != 34))
-			i++;
+		else if (str[i] == c)
+			b = 0;
+		i++;
 	}
 	return (count);
 }
 
-void	**ft_free(char **arr, int count)
+static void	ft_free_split(char **words)
 {
-	int	j;
+	int	i;
 
-	j = 0;
-	while (j < count)
+	i = 0;
+	while (words[i] != NULL)
 	{
-		free (arr[j]);
-		j++;
+		free(words[i]);
+		i++;
 	}
-	free(arr);
-	return (NULL);
-}
-
-char	**ft_fill_arr(char **arr, char c, char	*s)
-{
-	t_var	v;
-
-	(1 == 1) && (v.i = 0, v.j = -1, v.count = ft_count(s, c));
-	while (++v.j < v.count)
-	{
-		while (s[v.i] && s[v.i] == c)
-			v.i++;
-		if (s[v.i] && (s[v.i] == 39 || s[v.i] == 34))
-		{
-			v.start = v.i++;
-			while (s[v.i] && s[v.i] != 39 && s[v.i] != 34)
-				v.i++;
-			v.i++;
-		}
-		else if (s[v.i] && s[v.i] != c && s[v.i] != 39 && s[v.i] != 34)
-		{
-			v.start = v.i;
-			while (s[v.i] && s[v.i] != c && s[v.i] != 39 && s[v.i] != 34)
-				v.i++;
-		}
-		arr[v.j] = ft_substr(s, v.start, (v.i - v.start));
-		if (!arr[v.j])
-			return (ft_free(arr, v.j), NULL);
-	}
-	return (arr[v.j] = 0, arr);
+	free(words);
 }
 
 char	**ft_split(char *s, char c)
 {
-	char	**arr;
-	int		count;
+	int		wc;
+	int		wi;
+	int		wl;
+	char	**words;
 
-	if (s == NULL)
+	if (!s)
 		return (NULL);
-	count = ft_count(s, c);
-	arr = (char **)malloc((count + 1) * sizeof(char *));
-	if (!arr)
+	wi = 0;
+	wc = ft_countword(s, c);
+	words = (char **)malloc (sizeof(char *) * (wc + 1));
+	if (words == NULL)
 		return (NULL);
-	arr = ft_fill_arr(arr, c, s);
-	return (arr);
+	while (wi < wc)
+	{
+		while (*s == c)
+			s++;
+		wl = 0;
+		while (s[wl] && s[wl] != c)
+			wl++;
+		words[wi] = ft_substr(s, 0, wl);
+		if (!words[wi++])
+			return (ft_free_split(words), NULL);
+		s += wl;
+	}
+	return (words[wi] = NULL, words);
 }

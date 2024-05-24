@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lists.c                                            :+:      :+:    :+:   */
+/*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 13:00:42 by mohimi            #+#    #+#             */
-/*   Updated: 2024/05/24 18:04:48 by mohimi           ###   ########.fr       */
+/*   Created: 2024/05/24 18:01:42 by mohimi            #+#    #+#             */
+/*   Updated: 2024/05/24 18:51:17 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*ft_lstnew(int type, char *content)
+void	ft_free_leak(char **str)
 {
-	t_token	*new_node;
+	int	i;
 
-	new_node = malloc(sizeof(t_token));
-	if (new_node == NULL)
-		return (NULL);
-	new_node->type = type;
-	new_node->content = content;
-	new_node->next = NULL;
-	return (new_node);
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }
 
-t_token	*ft_lstlast(t_token *lst)
+t_env	*ft_lstlast_env(t_env *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -34,9 +34,9 @@ t_token	*ft_lstlast(t_token *lst)
 	return (lst);
 }
 
-void	add_back(t_token **lst, t_token *new)
+void	add_back_env(t_env **lst, t_env *new)
 {
-	t_token	*last;
+	t_env	*last;
 
 	if (!lst || !new)
 		return ;
@@ -45,14 +45,14 @@ void	add_back(t_token **lst, t_token *new)
 		*lst = new;
 		return ;
 	}
-	last = ft_lstlast(*lst);
+	last = ft_lstlast_env(*lst);
 	last->next = new;
 }
 
-void	ft_lstclear(t_token **lst)
+void	ft_lstclear_env(t_env **lst)
 {
-	t_token	*current;
-	t_token	*tmp;
+	t_env	*current;
+	t_env	*tmp;
 
 	if (!lst)
 		return ;

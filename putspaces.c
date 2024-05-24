@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:44:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/24 10:48:12 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/24 22:28:14 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,47 @@ void	ft_puspaces(char *av)
 			pipe_word(av, &token, &i);
 	}
 	if (pipe_errors(token) || redirec_errors(token))
-		ft_error_message(RED "syntax error ❌" RESET);
+		ft_error_message(RED "➥ syntax error❗" RESET);
 	return ;
 }
 
-void	minishell_loop(char *input)
+void	ft_fill_env(char **env, t_env **envr)
 {
+	int		i;
+	char	**split;
+	t_env	*new;
+
+	i = 0;
+	while (env[i])
+	{
+		split = ft_split(env[i], '=');
+		if (!split)
+			return ;
+		new = malloc(sizeof(t_env));
+		if (!new)
+		{
+			ft_free_leak(split);
+			return ;
+		}
+		new->key = ft_strdup(split[0]);
+		new->val = ft_strdup(split[1]);
+		new->next = NULL;
+		add_back_env(envr, new);
+		ft_free_leak(split);
+		i++;
+	}
+	return ;
+}
+
+void	minishell_loop(char *input, char **env)
+{
+	t_env	*enver;
+
+	enver = NULL;
+	ft_fill_env(env, &enver);
 	while (1)
 	{
-		input = readline(PINK "➜  Shell-2.4 ✗ " RESET);
+		input = readline(PURPLE "╰┈➤  Shell-2.4 ✗ " RESET);
 		if (!input)
 			(printf("exit\n"), exit(0));
 		else if (ft_strncmp(input, "exit", 4) == 0)
@@ -54,7 +86,7 @@ void	minishell_loop(char *input)
 	}
 }
 
-int	main(int ac, char **av)
+int	main(int ac, char **av, char **env)
 {
 	char	*str;
 
@@ -65,6 +97,6 @@ int	main(int ac, char **av)
 		exit(0);
 	}
 	printf(ORANGE "Welcome to our minishell 🤗\n" RESET);
-	minishell_loop(str);
+	minishell_loop(str, env);
 	return (0);
 }

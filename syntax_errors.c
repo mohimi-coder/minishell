@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 11:47:23 by mohimi            #+#    #+#             */
-/*   Updated: 2024/05/24 11:01:02 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/24 22:14:10 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	pipe_errors(t_token *token)
 	t_token	*tmp;
 
 	tmp = token;
-	if (tmp->type == PIPE)
+	if (tmp && tmp->type == PIPE)
 		return (1);
 	while (tmp)
 	{

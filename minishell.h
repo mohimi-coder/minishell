@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/24 11:59:12 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/24 22:05:04 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@
 # define PINK "\x1b[95m"
 # define RED "\x1b[31m"
 # define ORANGE "\x1b[38;5;214m"
+# define BLUE "\x1b[34m"
+# define GREEN "\x1b[32m"
+# define YELLOW "\x1b[33m"
+# define MAGENTA "\x1b[35m"
+# define CYAN "\x1b[36m"
+# define BOLD "\033[1m"
+# define UNDERLINE "\033[4m"
+# define PURPLE "\033[01;35m"
 # define RESET "\x1b[0m"
 
 /*----------------------------------Tokenization-----------------------------*/
@@ -59,12 +67,12 @@ typedef struct token
 	struct token	*next;
 
 }			t_token;
-
+/*-------------------- enverment struct------------------------*/
 typedef struct env
 {
 	char		*key;
 	char		*val;
-	struct env 	*next;
+	struct env	*next;
 }			t_env;
 
 /*--------------------------lexer----------------------------*/
@@ -79,6 +87,7 @@ void	out_redir(char *av, t_token **token, int *i);
 void	in_redir(char *av, t_token **token, int *i);
 void	pipe_word(char *av, t_token **token, int *i);
 void	handle_dollar(char *av, int *i, t_token **token);
+void	ft_free_leak(char **str);
 
 /*---------------------------- syntax error----------------------------*/
 int		pipe_errors(t_token *token);
@@ -93,4 +102,8 @@ int		ft_isalnum(int a);
 t_token	*ft_lstnew(int type, char *content);
 void	add_back(t_token **lst, t_token *new);
 void	ft_lstclear(t_token **lst);
+/*------------------linked list env-------------------------------*/
+void	add_back_env(t_env **lst, t_env *new);
+t_env	*ft_lstlast_env(t_env *lst);
+void	ft_lstclear_env(t_env **lst);
 #endif
