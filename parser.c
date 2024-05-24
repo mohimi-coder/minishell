@@ -6,36 +6,11 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:25:07 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/22 21:30:34 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/24 10:48:44 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_operation_handller(char *new_str)
-{
-	int	i;
-
-	i = 0;
-	while (new_str[i])
-	{
-		if (!ft_strncmp(new_str + i, "<<<", 3)
-			|| !ft_strncmp(new_str + i, ">>>", 3))
-			ft_error_message("syntax error near unexpected token");
-		if (ft_error_operation(new_str[i]))
-			ft_error_message("syntax error: special characters!");
-		if (ft_operations(new_str[i]))
-		{
-			if (new_str[i] == '<' && new_str[i + 1] == '|')
-				ft_error_message("syntax error near unexpected token");
-			if (new_str[i] == '>' && new_str[i + 1] == '<')
-				ft_error_message("syntax error near unexpected token");
-			if (new_str[i] == '|' && new_str[i + 1] == '|')
-				ft_error_message("syntax error near unexpected token");
-		}
-		i++;
-	}
-}
 
 void	handle_quotes(char *av, t_token **token, int *i)
 {

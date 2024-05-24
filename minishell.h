@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/23 17:08:57 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/05/24 11:59:12 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,19 @@ typedef struct token
 	struct token	*next;
 
 }			t_token;
+
+typedef struct env
+{
+	char		*key;
+	char		*val;
+	struct env 	*next;
+}			t_env;
+
 /*--------------------------lexer----------------------------*/
 char	**ft_split(char *s, char c);
 void	ft_error_message(char *mess);
 int		ft_operations(char c);
 int		ft_error_operation(char c);
-void	ft_operation_handller(char *new_str);
 void	handle_quotes(char *av, t_token **token, int *i);
 void	handle_spaces(char *av, t_token **token, int *i);
 void	skip_space(char *str, int *i);
