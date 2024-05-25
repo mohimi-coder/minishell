@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/24 22:05:04 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/25 16:33:27 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@
 typedef struct var
 {
 	int		i;
-	int		j;
-	int		len;
 	int		start;
-	int		count;
+	char	*tmp;
+	char	*st;
+	char	*join;
 }			t_var;
 /*--------------- tokens struct---------------------------------*/
 typedef struct token
@@ -97,7 +97,9 @@ int		ft_strlen(char *str);
 int		ft_strncmp(const char *s1, const char *s2, int n);
 char	*ft_substr(char *s, int start, int len);
 char	*ft_strdup(char *s1);
-int		ft_isalnum(int a);
+int		f_alnum(int a);
+char	*ft_strjoin(char *s1, char *s2);
+int		ft_strcmp(char const *s1, char const *s2);
 /*------------------------linked list-------------------------------*/
 t_token	*ft_lstnew(int type, char *content);
 void	add_back(t_token **lst, t_token *new);
@@ -106,4 +108,8 @@ void	ft_lstclear(t_token **lst);
 void	add_back_env(t_env **lst, t_env *new);
 t_env	*ft_lstlast_env(t_env *lst);
 void	ft_lstclear_env(t_env **lst);
+/*------------------------Expand-----------------------------------*/
+char	*ft_expand_var(char *str, t_env *env);
+void	ft_expand(t_token *token, t_env *env);
+void	ft_expand_dollar(t_token *tok, char *str, t_env *env);
 #endif

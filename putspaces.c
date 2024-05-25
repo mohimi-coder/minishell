@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   putspaces.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:44:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/24 22:48:21 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/25 16:31:40 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_puspaces(char *av)
+void	ft_puspaces(char *av, t_env *env)
 {
 	t_token	*token;
 	int		i;
@@ -37,6 +37,7 @@ void	ft_puspaces(char *av)
 	}
 	if (pipe_errors(token) || redirec_errors(token))
 		ft_error_message(RED BOLD "➥  syntax error❗" RESET);
+	ft_expand(token, env);
 	return ;
 }
 
@@ -70,10 +71,10 @@ void	ft_fill_env(char **env, t_env **envr)
 
 void	minishell_loop(char *input, char **env)
 {
-	t_env	*enver;
+	t_env	*envr;
 
-	enver = NULL;
-	ft_fill_env(env, &enver);
+	envr = NULL;
+	ft_fill_env(env, &envr);
 	while (1)
 	{
 		input = readline(PURPLE"╰┈➤ Shell-2.4 ✗ " RESET);
@@ -81,7 +82,7 @@ void	minishell_loop(char *input, char **env)
 			(printf("exit\n"), exit(0));
 		else if (ft_strncmp(input, "exit", 4) == 0)
 			(printf("exit\n"), exit(0));
-		ft_puspaces(input);
+		ft_puspaces(input, envr);
 		add_history(input);
 	}
 }

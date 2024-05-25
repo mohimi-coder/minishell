@@ -6,6 +6,7 @@ FILE =  parser_utils.c parser_utils2.c \
 		parser.c putspaces.c \
 		lists.c libft_helper.c \
 		syntax_errors.c ft_split.c env_list.c \
+		ft_expand.c
 
 OBJECT_FILE = $(FILE:.c=.o)
 
