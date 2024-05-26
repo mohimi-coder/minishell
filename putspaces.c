@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   putspaces.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:44:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/25 16:31:40 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/05/26 16:54:00 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_puspaces(char *av, t_env *env)
 	}
 	if (pipe_errors(token) || redirec_errors(token))
 		ft_error_message(RED BOLD "➥  syntax error❗" RESET);
-	ft_expand(token, env);
+	(ft_expand(token, env), ft_lstclear(&token));
 	return ;
 }
 
@@ -77,20 +77,26 @@ void	minishell_loop(char *input, char **env)
 	ft_fill_env(env, &envr);
 	while (1)
 	{
-		input = readline(PURPLE"╰┈➤ Shell-2.4 ✗ " RESET);
+		input = readline(PURPLE"╰┈➤ Shell-Z.M ✗ " RESET);
 		if (!input)
 			(printf("exit\n"), exit(0));
 		else if (ft_strncmp(input, "exit", 4) == 0)
 			(printf("exit\n"), exit(0));
 		ft_puspaces(input, envr);
 		add_history(input);
+		free(input);
 	}
+}
+
+void f(void)
+{
+	system("leaks minishell");
 }
 
 int	main(int ac, char **av, char **env)
 {
 	char	*str;
-
+	atexit(f);
 	str = NULL;
 	if (ac != 1 || av[1])
 	{

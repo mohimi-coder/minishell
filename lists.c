@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:00:42 by mohimi            #+#    #+#             */
-/*   Updated: 2024/05/24 18:04:48 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/26 16:27:53 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	ft_lstclear(t_token **lst)
 	{
 		tmp = current;
 		current = current->next;
+		free(tmp->content);
 		free(tmp);
 	}
 	*lst = NULL;

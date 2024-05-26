@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 09:45:20 by mohimi            #+#    #+#             */
-/*   Updated: 2024/05/25 17:32:35 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/26 13:17:25 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ int	generate_name(char **name)
 
 	i = 1;
 	tmp = NULL;
-	base = "/tmp/herd_";
+	base = "/tmp/herd-";
 	*name = ft_strdup("/tmp/herd");
 	if (!*name)
 		return (-1);
 	while (!access(*name, F_OK))
 	{
 		i++;
-		tmp = ft_strjoin(base, ft_itoa(i));
+		tmp = join(base, ft_itoa(i));
 		if (!tmp)
 			return (-1);
 		free (*name);
@@ -86,6 +86,7 @@ int	open_file_name(char **str, int *fd)
 	file_name = NULL;
 	if (*fd && !generate_name(&file_name))
 	{
+		*fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0666);
 		if (*fd < 0)
 		{
 			free(file_name);
