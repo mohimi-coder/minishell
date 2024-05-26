@@ -6,7 +6,7 @@
 /*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:23 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/25 16:33:02 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/05/26 10:20:26 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ char	*ft_expand_var(char *str, t_env *env)
 	while (env)
 	{
 		if (!ft_strcmp(env->key, str + 1))
-			return (env->val);
+			return (ft_strdup(env->val));
 		env = env->next;
 	}
-	return (NULL);
+	return (ft_strdup(""));
 }
 
 void	ft_expand_dollar(t_token *tok, char *s, t_env *env)
 {
 	t_var	v;
 
-	(1 == 1) && (v.i = 0, v.join = NULL);
+	(1 == 1) && (v.i = 0, v.join = NULL, v.tmp = NULL);
 	while (s[v.i])
 	{
 		if (s[v.i] == '$' && (f_alnum(s[v.i + 1]) || s[v.i + 1] == '_'))
@@ -48,7 +48,7 @@ void	ft_expand_dollar(t_token *tok, char *s, t_env *env)
 		else
 		{
 			v.tmp = ft_substr(s, v.i, 1);
-			v.join = ft_strjoin(v.join, v.tmp);
+			(v.join = ft_strjoin(v.join, v.tmp));
 			v.i++;
 		}
 	}
