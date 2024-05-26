@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/25 16:33:27 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/05/26 11:45:22 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <limits.h>
+# include <errno.h>
 
 /*--------------------------------------- colors------------------------------*/
 # define PINK "\x1b[95m"

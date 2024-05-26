@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:23 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/26 10:20:26 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/05/26 11:47:41 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*ft_expand_var(char *str, t_env *env)
 	while (env)
 	{
 		if (!ft_strcmp(env->key, str + 1))
-			return (ft_strdup(env->val));
+			if (env->val)
+				return (ft_strdup(env->val));
 		env = env->next;
 	}
 	return (ft_strdup(""));
