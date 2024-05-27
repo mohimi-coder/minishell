@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:23 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/27 11:29:49 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/27 12:19:28 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ char	*ft_expand_var(char *str, t_env *env)
 	{
 		if (!ft_strcmp(env->key, str + 1))
 			if (env->val)
-				return (ft_strdup(env->val));
+				return (free(str), ft_strdup(env->val));
 		env = env->next;
 	}
-	return (ft_strdup(""));
+	return (free(str), ft_strdup(""));
 }
 
 void	ft_expand_dollar(t_token *tok, char *s, t_env *env)
@@ -44,7 +44,7 @@ void	ft_expand_dollar(t_token *tok, char *s, t_env *env)
 					v.i++;
 			v.st = ft_substr(s, v.start, ++v.i - v.start);
 			v.tmp = ft_expand_var(v.st, env);
-			(free(v.st), v.join = ft_strjoin(v.join, v.tmp));
+			(v.join = ft_strjoin(v.join, v.tmp));
 		}
 		else
 		{
@@ -53,6 +53,8 @@ void	ft_expand_dollar(t_token *tok, char *s, t_env *env)
 			v.i++;
 		}
 	}
+	if (!v.join)
+		v.join = ft_strdup("");
 	(free(tok->content), tok->content = v.join);
 }
 
@@ -64,10 +66,7 @@ void	ft_expand(t_token *token, t_env *env)
 	while (tmp)
 	{
 		if (tmp->type == VAR)
-		{
-			free (tmp->content);
 			tmp->content = ft_expand_var(tmp->content, env);
-		}
 		else if (tmp->type == DOUBLE_QUOTES)
 			ft_expand_dollar(tmp, tmp->content, env);
 		printf("%s\n", tmp->content);
