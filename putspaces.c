@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:44:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/26 16:54:00 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/27 11:29:07 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,10 @@ void	minishell_loop(char *input, char **env)
 	}
 }
 
-void f(void)
-{
-	system("leaks minishell");
-}
-
 int	main(int ac, char **av, char **env)
 {
 	char	*str;
-	atexit(f);
+
 	str = NULL;
 	if (ac != 1 || av[1])
 	{

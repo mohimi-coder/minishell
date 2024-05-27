@@ -6,15 +6,32 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:25:07 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/26 16:37:22 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/27 10:57:30 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	double_quotes(char *av, t_token **token, int *i)
+{
+	int		start;
+	char	*str;
+
+	start = *i;
+	(*i)++;
+	while (av[*i] != 34 && av[*i])
+		(*i)++;
+	if (!av[*i])
+		(ft_lstclear(token), \
+			ft_error_message(RED BOLD"➥  unclosed quotes 📛" RESET));
+	str = ft_substr(av, start + 1, ++(*i) - start - 2);
+	add_back(token, ft_lstnew(DOUBLE_QUOTES, str));
+}
+
 void	handle_quotes(char *av, t_token **token, int *i)
 {
-	int	start;
+	int		start;
+	char	*str;
 
 	start = *i;
 	if (av[*i] == 39)
@@ -25,20 +42,11 @@ void	handle_quotes(char *av, t_token **token, int *i)
 		if (!av[*i])
 			(ft_lstclear(token), \
 				ft_error_message(RED BOLD"➥  unclosed quotes📛" RESET));
-		add_back(token, ft_lstnew(SINGLE_QUOTE,
-				ft_substr(av, start + 1, ++(*i) - start - 2)));
+		str = ft_substr(av, start + 1, ++(*i) - start - 2);
+		add_back(token, ft_lstnew(SINGLE_QUOTE, str));
 	}
-	else if (av[*i] == 34)
-	{
-		(*i)++;
-		while (av[*i] != 34 && av[*i])
-			(*i)++;
-		if (!av[*i])
-			(ft_lstclear(token), \
-				ft_error_message(RED BOLD"➥  unclosed quotes 📛" RESET));
-		add_back(token, ft_lstnew(DOUBLE_QUOTES,
-				ft_substr(av, start + 1, ++(*i) - start - 2)));
-	}
+	else
+		double_quotes(av, token, i);
 }
 
 void	ft_var(char *av, t_token **token, int *i, int *start)

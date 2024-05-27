@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:21:21 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/26 10:20:14 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/05/27 11:31:47 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,11 @@ char	*ft_strdup(char *s1)
 	char	*ptr;
 	size_t	i;
 
+	if (!s1)
+		return (NULL);
 	i = 0;
 	ptr = (char *)malloc(ft_strlen(s1) + 1);
-	if (!ptr || !s1)
+	if (!ptr)
 		return (NULL);
 	while (s1[i])
 	{
@@ -70,9 +72,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
-		return (ft_strdup(s2));
+		return (s2);
 	if (!s2)
-		return (ft_strdup(s1));
+		return (s1);
 	i = 0;
 	j = 0;
 	str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
