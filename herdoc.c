@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:04:48 by mohimi            #+#    #+#             */
-/*   Updated: 2024/06/02 19:35:19 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/02 20:46:06 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,13 @@ void process_herdoc(t_token **new, t_token **tmp, t_env *env)
 	char *join;
 	int flag;
 	char *filename;
+	t_token *node;
 
 	(1) && (join = NULL, flag = 0);
 	if (*tmp && (*tmp)->type == SPC)
 	{
-		add_back(new, ft_lstnew((*tmp)->type, (*tmp)->content));
+		node = ft_lstnew((*tmp)->type,(*tmp)->content);
+		add_back(new, node);
 		(*tmp) = (*tmp)->next;
 	}
 	while (*tmp && (*tmp)->type != SPC && (*tmp)->type != OUT &&
@@ -97,6 +99,7 @@ void process_herdoc(t_token **new, t_token **tmp, t_env *env)
 	}
 	filename = func(join, flag, env);
 	add_back(new, ft_lstnew(WORD, filename));
+	ft_lstclear(tmp);
 	free(filename);
 }
 
@@ -119,7 +122,7 @@ void ft_herdoc(t_token *token, t_token **new, t_env *env)
 		}
 		else
 		{
-			add_back(new, ft_lstnew(tmp->type, tmp->content));
+			add_back(new, ft_lstnew(tmp->type, tmp->content)); // <<
 			tmp = tmp->next;
 			process_herdoc(new, &tmp, env);
 		}
