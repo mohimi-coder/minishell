@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:57:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/02 15:36:30 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/02 18:56:35 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,8 @@ void	ft_pwd(void)
 	free (pwd);
 }
 
-
-
 void	ft_builtins(t_token *token, t_env **env)
-{ 
+{
 	while (token)
 	{
 		if (!ft_strcmp(token->content, "env"))

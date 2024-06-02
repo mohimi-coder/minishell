@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   putspaces.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:44:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/02 16:57:03 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/02 19:39:37 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_puspaces(char *av, t_env **env)
+void	ft_puspaces(char *av, t_env *env)
 {
 	t_token	*token;
+	t_token	*newlist;
 	int		i;
 
-	token = NULL;
+	(1) && (token = NULL, newlist = NULL);
 	i = 0;
 	skip_space(av, &i);
 	while (av[i])
@@ -35,9 +36,8 @@ void	ft_puspaces(char *av, t_env **env)
 		else
 			pipe_word(av, &token, &i);
 	}
-	if (pipe_errors(token) || redirec_errors(token))
-		ft_error_message(RED BOLD "➥  syntax error❗" RESET);
-	(ft_expand(token, *env), ft_builtins(token, env), ft_lstclear(&token));
+	ft_herdoc(token, &newlist, env);
+	(ft_expand(token, env), ft_builtins(token, &env), ft_lstclear(&token));
 	return ;
 }
 
@@ -73,7 +73,7 @@ void	minishell_loop(char *input, char **env)
 		input = readline(PURPLE"╰┈➤ Shell-Z.M ✗ " RESET);
 		if (!input)
 			(printf("exit\n"), exit(0));
-		ft_puspaces(input, &envr);
+		ft_puspaces(input, envr);
 		add_history(input);
 		free(input);
 	}
@@ -89,8 +89,8 @@ int	main(int ac, char **av, char **env)
 	char	*str;
 
 	str = NULL;
-	// atexit(fct);
-	
+	atexit(fct);
+
 	if (ac != 1 || av[1])
 	{
 		printf("Error\n");

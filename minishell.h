@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/02 18:49:51 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/02 19:37:10 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ char	*ft_strdup(char *s1);
 int		f_alnum(int a);
 char	*ft_strjoin(char *s1, char *s2);
 int		ft_strcmp(char const *s1, char const *s2);
-char	*ft_strjoin2(char *s1, char *s2);
 char	*ft_strchr(char *s, char c);
 /*------------------------linked list-------------------------------*/
 t_token	*ft_lstnew(int type, char *content);
@@ -126,4 +125,10 @@ void	ft_export_var(t_env *env, t_token *token);
 t_env	*ft_check_var(char *str, t_env *env);
 void	ft_cd(t_token *token);
 void	ft_exit(t_token *token);
+/*-------------------herdoc functions-------------------------------*/
+void	ft_putendl_fd(char *s, int fd);
+char	*ft_strjoin_her(char *s1, char *s2);
+char	*ft_itoa(int n);
+char	*ft_expand_dollar_her(char *s, t_env *env);
+void	ft_herdoc(t_token *token, t_token **new, t_env *env);
 #endif
