@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:23 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/27 12:19:28 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/02 10:45:06 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_expand_var(char *str, t_env *env)
 	{
 		if (!ft_strcmp(env->key, str + 1))
 			if (env->val)
-				return (free(str), ft_strdup(env->val));
+				return (free(str), ft_strdup(env->val + 1));
 		env = env->next;
 	}
 	return (free(str), ft_strdup(""));
@@ -48,7 +48,13 @@ void	ft_expand_dollar(t_token *tok, char *s, t_env *env)
 		}
 		else
 		{
-			v.tmp = ft_substr(s, v.i, 1);
+			if (s[v.i] == '$' && s[v.i + 1] == '$')
+			{
+				v.tmp = ft_strdup("$$");
+				v.i++;
+			}
+			else
+				v.tmp = ft_substr(s, v.i, 1);
 			(v.join = ft_strjoin(v.join, v.tmp));
 			v.i++;
 		}

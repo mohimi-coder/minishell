@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 18:01:42 by mohimi            #+#    #+#             */
-/*   Updated: 2024/05/26 16:27:13 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/05/31 19:32:52 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_env	*lstnew_env(char *key, char *val)
+{
+	t_env	*new_node;
+
+	new_node = malloc(sizeof(t_env));
+	if (new_node == NULL)
+		return (NULL);
+	new_node->key = key;
+	new_node->val = val;
+	new_node->next = NULL;
+	return (new_node);
+}
 
 void	ft_free_leak(char **str)
 {
@@ -64,4 +77,14 @@ void	ft_lstclear_env(t_env **lst)
 		free(tmp);
 	}
 	*lst = NULL;
+}
+
+void	ft_lstdelone(t_env *lst)
+{
+	if (!lst)
+		return ;
+	free(lst->key);
+	free(lst->val);
+	free(lst);
+	lst = NULL;
 }

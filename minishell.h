@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/26 11:45:22 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/02 18:49:51 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <readline/history.h>
 # include <limits.h>
 # include <errno.h>
+# include <signal.h>
 
 /*--------------------------------------- colors------------------------------*/
 # define PINK "\x1b[95m"
@@ -40,7 +41,7 @@
 /*----------------------------------Tokenization-----------------------------*/
 
 # define WORD 1
-# define SPACE 2
+# define SPC 2
 # define DOUBLE_QUOTES 3
 # define SINGLE_QUOTE 4
 # define OUT 5
@@ -68,15 +69,17 @@ typedef struct token
 	struct token	*next;
 
 }			t_token;
-/*-------------------- enverment struct------------------------*/
+/*-------------------- environment struct------------------------*/
 typedef struct env
 {
 	char		*key;
 	char		*val;
+	int			index;
 	struct env	*next;
 }			t_env;
 
 /*--------------------------lexer----------------------------*/
+void	signals(void);
 char	**ft_split(char *s, char c);
 void	ft_error_message(char *mess);
 int		ft_operations(char c);
@@ -101,6 +104,8 @@ char	*ft_strdup(char *s1);
 int		f_alnum(int a);
 char	*ft_strjoin(char *s1, char *s2);
 int		ft_strcmp(char const *s1, char const *s2);
+char	*ft_strjoin2(char *s1, char *s2);
+char	*ft_strchr(char *s, char c);
 /*------------------------linked list-------------------------------*/
 t_token	*ft_lstnew(int type, char *content);
 void	add_back(t_token **lst, t_token *new);
@@ -109,8 +114,16 @@ void	ft_lstclear(t_token **lst);
 void	add_back_env(t_env **lst, t_env *new);
 t_env	*ft_lstlast_env(t_env *lst);
 void	ft_lstclear_env(t_env **lst);
+t_env	*lstnew_env(char *key, char *val);
+void	ft_lstdelone(t_env *lst);
 /*------------------------Expand-----------------------------------*/
 char	*ft_expand_var(char *str, t_env *env);
 void	ft_expand(t_token *token, t_env *env);
 void	ft_expand_dollar(t_token *tok, char *str, t_env *env);
+/*------------------------Builtins-----------------------------------*/
+void	ft_builtins(t_token *token, t_env **env);
+void	ft_export_var(t_env *env, t_token *token);
+t_env	*ft_check_var(char *str, t_env *env);
+void	ft_cd(t_token *token);
+void	ft_exit(t_token *token);
 #endif

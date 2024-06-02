@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:50:53 by mohimi            #+#    #+#             */
-/*   Updated: 2024/05/26 23:35:37 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/02 18:50:15 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	handle_spaces(char *av, t_token **token, int *i)
 		(*i)++;
 	}
 	if (c == 1 && av[*i])
-		add_back(token, ft_lstnew(SPACE, ft_strdup(" ")));
+		add_back(token, ft_lstnew(SPC, ft_strdup(" ")));
 }
 
 void	skip_space(char *str, int *i)
