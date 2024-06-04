@@ -6,7 +6,7 @@
 /*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 14:43:38 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/02 14:57:46 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/04 12:37:52 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,31 @@
 
 int	ft_atoi(char *str)
 {
-	int i = 0;
-	int sign = 1;
-	int res = 0;
-	while((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-		i++;
+	int	i;
+	int	sign;
+	int	res;
+
+	i = 0;
+	sign = 1;
+	res = 0;
 	if (str[i] == '+' || str[i] == '-')
 	{
 		if (str[i] == '-')
 			sign = -1;
 		i++;
 	}
-	while(str[i] >= '0' && str[i] <= '9')
+	if (!str[i])
+		(ft_error_message(RED BOLD"numeric argument required❗" RESET), exit(0));
+	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = res * 10 + str[i] - 48;
 		i++;
 	}
-	return(res * sign);
+	if (str[i])
+		(ft_error_message(RED BOLD"numeric argument required❗" RESET), exit(0));
+	return (res * sign);
 }
+
 void	ft_exit(t_token *token)
 {
 	char	*s;
