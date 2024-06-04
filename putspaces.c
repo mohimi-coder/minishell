@@ -12,13 +12,12 @@
 
 #include "minishell.h"
 
-void	ft_puspaces(char *av, t_env *env)
+void	ft_puspaces(char *av, t_env **env)
 {
 	t_token	*token;
-	t_token	*newlist;
 	int		i;
 
-	(1) && (token = NULL, newlist = NULL);
+	(1) && (token = NULL);
 	i = 0;
 	skip_space(av, &i);
 	while (av[i])
@@ -36,8 +35,9 @@ void	ft_puspaces(char *av, t_env *env)
 		else
 			pipe_word(av, &token, &i);
 	}
-	ft_herdoc(token, &newlist, env);
-	(ft_expand(token, env), ft_builtins(token, &env), ft_lstclear(&token));
+	ft_herdoc(token, *env);
+	(ft_expand(token, *env), ft_builtins(token, env), ft_lstclear(&token));
+	// ft_lstclear_env(env);
 	return ;
 }
 
@@ -73,8 +73,9 @@ void	minishell_loop(char *input, char **env)
 		input = readline(PURPLE"╰┈➤ Shell-Z.M ✗ " RESET);
 		if (!input)
 			(printf("exit\n"), exit(0));
-		ft_puspaces(input, envr);
-		add_history(input);
+		ft_puspaces(input, &envr);
+		if (ft_strcmp(input, ""))
+			add_history(input);
 		free(input);
 	}
 }

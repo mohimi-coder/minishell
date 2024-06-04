@@ -130,5 +130,5 @@ void	ft_putendl_fd(char *s, int fd);
 char	*ft_strjoin_her(char *s1, char *s2);
 char	*ft_itoa(int n);
 char	*ft_expand_dollar_her(char *s, t_env *env);
-void	ft_herdoc(t_token *token, t_token **new, t_env *env);
+void	ft_herdoc(t_token *token, t_env *env);
 #endif

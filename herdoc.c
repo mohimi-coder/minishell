@@ -12,10 +12,11 @@
 
 #include "minishell.h"
 
-char *read_and_expand(char *delimiter, int flag, t_env *env, char **buff)
+char *read_and_expand(char *delimiter, int flag, t_env *env)
 {
 	char *str;
 	char *expanded;
+	char *buff = NULL;
 	char *tmp;
 
 	str = readline(YELLOW BOLD "heredoc 📝➥ " RESET);
@@ -24,29 +25,38 @@ char *read_and_expand(char *delimiter, int flag, t_env *env, char **buff)
 		if (flag == 0)
 		{
 			expanded = ft_expand_dollar_her(str, env);
-			tmp = ft_strjoin_her(*buff, expanded);
+			tmp = ft_strjoin_her(buff, expanded);
+			free(expanded);
+			free(buff);
+			buff = tmp;
 		}
 		else
-			tmp = ft_strjoin_her(*buff, str);
-		free(*buff);
-		*buff = tmp;
+		{
+			tmp  = ft_strjoin_her(buff, str);
+			free(buff);
+			buff = tmp;
+		}
 		free(str);
 		str = readline(YELLOW BOLD "heredoc 📝➥ " RESET);
 		if (ft_strcmp(str, delimiter))
 		{
-			tmp = ft_strjoin_her(*buff, ft_strdup("\n"));
-			free(*buff), *buff = tmp;
+			tmp = ft_strjoin_her(buff, "\n");
+			free(buff);
+			buff = tmp;
 		}
 	}
-	return (free(str), *buff);
+	return (free(delimiter), free(str), buff);
 }
 
 char *create_temp_file(char *buff, int *i)
 {
 	char *file_name;
 	int fd;
+	char  *nbr;
 
-	file_name = ft_strjoin_her("/tmp/file_", ft_itoa(*i));
+	nbr = ft_itoa(*i);
+	file_name = ft_strjoin_her("/tmp/file_", nbr);
+	free(nbr);
 	fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0777);
 	if (fd < 0)
 	{
@@ -68,7 +78,7 @@ char *func(char *delimiter, int flag, t_env *env)
 	char *file_name;
 
 	(1) && (i = 0, buff = NULL, file_name = NULL);
-	buff = read_and_expand(delimiter, flag, env, &buff);
+	buff = read_and_expand(delimiter, flag, env);
 	if (buff)
 		file_name = create_temp_file(buff, &i);
 	return (file_name);
@@ -84,7 +94,7 @@ void process_herdoc(t_token **new, t_token **tmp, t_env *env)
 	(1) && (join = NULL, flag = 0);
 	if (*tmp && (*tmp)->type == SPC)
 	{
-		node = ft_lstnew((*tmp)->type,(*tmp)->content);
+		node = ft_lstnew((*tmp)->type, ft_strdup((*tmp)->content));
 		add_back(new, node);
 		(*tmp) = (*tmp)->next;
 	}
@@ -98,16 +108,17 @@ void process_herdoc(t_token **new, t_token **tmp, t_env *env)
 		*tmp = (*tmp)->next;
 	}
 	filename = func(join, flag, env);
-	add_back(new, ft_lstnew(WORD, filename));
-	ft_lstclear(tmp);
+	add_back(new, ft_lstnew(WORD, ft_strdup(filename)));
 	free(filename);
 }
 
-void ft_herdoc(t_token *token, t_token **new, t_env *env)
+void ft_herdoc(t_token *token, t_env *env)
 {
 	t_token *tmp;
+	t_token *new;
 
 	tmp = token;
+	new = NULL;
 	if (pipe_errors(token) || redirec_errors(token))
 	{
 		ft_error_message(RED BOLD "➥  syntax error❗" RESET);
@@ -117,14 +128,15 @@ void ft_herdoc(t_token *token, t_token **new, t_env *env)
 	{
 		if (tmp->type != HER_DOC)
 		{
-			add_back(new, ft_lstnew(tmp->type, tmp->content));
+			add_back(&new, ft_lstnew(tmp->type, ft_strdup(tmp->content)));
 			tmp = tmp->next;
 		}
 		else
 		{
-			add_back(new, ft_lstnew(tmp->type, tmp->content)); // <<
+			add_back(&new, ft_lstnew(tmp->type, ft_strdup(tmp->content))); // <<
 			tmp = tmp->next;
-			process_herdoc(new, &tmp, env);
+			process_herdoc(&new, &tmp, env);
 		}
 	}
+	ft_lstclear(&new);
 }
