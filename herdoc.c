@@ -109,6 +109,13 @@ void process_herdoc(t_token **new, t_token **tmp, t_env *env)
 	}
 	filename = func(join, flag, env);
 	add_back(new, ft_lstnew(WORD, ft_strdup(filename)));
+	t_token *tmp1;
+	tmp1 = *new;
+	while(tmp1)
+	{
+		printf("=====>%s\n", tmp1->content);
+		tmp1 = tmp1->next;
+	}
 	free(filename);
 }
 

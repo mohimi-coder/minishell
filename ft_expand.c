@@ -75,7 +75,7 @@ void	ft_expand(t_token *token, t_env *env)
 			tmp->content = ft_expand_var(tmp->content, env);
 		else if (tmp->type == DOUBLE_QUOTES)
 			ft_expand_dollar(tmp, tmp->content, env);
-		printf("%s\n", tmp->content);
+		// printf("%s\n", tmp->content);
 		tmp = tmp->next;
 	}
 }

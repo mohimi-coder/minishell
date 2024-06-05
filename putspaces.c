@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:44:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/02 20:24:48 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/05 18:45:45 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_puspaces(char *av, t_env **env)
 {
 	t_token	*token;
+	m_list *tmp;
 	int		i;
 
 	(1) && (token = NULL);
@@ -36,6 +37,7 @@ void	ft_puspaces(char *av, t_env **env)
 			pipe_word(av, &token, &i);
 	}
 	ft_herdoc(token, *env);
+	tmp = midl_list(token);
 	(ft_expand(token, *env), ft_builtins(token, env), ft_lstclear(&token));
 	// ft_lstclear_env(env);
 	return ;
@@ -70,7 +72,7 @@ void	minishell_loop(char *input, char **env)
 	while (1)
 	{
 		signals();
-		input = readline(PURPLE"╰┈➤ Shell-Z.M ✗ " RESET);
+		input = readline(PURPLE"╰┈➤ Shell-Z.M ✗ "RESET);
 		if (!input)
 			(printf("exit\n"), exit(0));
 		ft_puspaces(input, &envr);
@@ -80,18 +82,11 @@ void	minishell_loop(char *input, char **env)
 	}
 }
 
-void fct()
-{
-	system("leaks minishell");
-}
-
 int	main(int ac, char **av, char **env)
 {
 	char	*str;
 
 	str = NULL;
-	atexit(fct);
-
 	if (ac != 1 || av[1])
 	{
 		printf("Error\n");

@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/02 23:21:05 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/05 22:59:18 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,14 @@ typedef struct env
 	struct env	*next;
 }			t_env;
 
+/*---------------------new struct-----------------------------*/
+typedef struct midle_list
+{
+	t_token			*cmond;
+	t_token 		*dir;
+	struct midle_list	*next;	
+} 				m_list;
+
 /*--------------------------lexer----------------------------*/
 void	signals(void);
 char	**ft_split(char *s, char c);
@@ -131,4 +139,9 @@ char	*ft_strjoin_her(char *s1, char *s2);
 char	*ft_itoa(int n);
 char	*ft_expand_dollar_her(char *s, t_env *env);
 void	ft_herdoc(t_token *token, t_env *env);
+/*------------------fill midl list------------------------------------*/
+m_list	*ft_lstlast_mdl(m_list *lst);
+m_list	*ft_lstnew_mdl(t_token *cmond, t_token *dir);
+void	add_back_mdl(m_list **lst, m_list *new);
+m_list	*midl_list(t_token *head);
 #endif

@@ -8,7 +8,7 @@ FILE =  parser_utils.c parser_utils2.c \
 		syntax_errors.c ft_split.c env_list.c \
 		ft_expand.c ft_builtins.c ft_export.c \
 		ft_cd.c ft_exit.c signals.c herdoc.c \
-		utils_her.c \
+		utils_her.c fill_new_struct.c \
 
 OBJECT_FILE = $(FILE:.c=.o)
 
