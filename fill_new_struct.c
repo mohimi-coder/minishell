@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:32:27 by mohimi            #+#    #+#             */
-/*   Updated: 2024/06/05 23:31:12 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/06 10:36:35 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,41 +49,45 @@ void	add_back_mdl(m_list **lst, m_list *new)
 	last->next = new;
 }
 
-m_list *midl_list(t_token *head)
+m_list *midl_list(t_token *head) 
 {
-        t_token *cmd = NULL;
-        t_token *dir = NULL;
-        m_list  *node;
-	t_token	*tmp;
-	char	*content_dup;
-
-	(1) && (node = NULL, tmp = head);
-        while (tmp)
-        {
-		cmd = NULL;
-		dir = NULL;
-		while(tmp && tmp->type != PIPE)
-              	{
-			content_dup = ft_strdup(tmp->content);
-			if (!content_dup)
-				return(NULL);
-                	if (tmp->type == HER_DOC || tmp->type == OUT || tmp->type == IN || tmp->type == APPEND_OUT)
-                        	add_back(&dir, ft_lstnew(tmp->type, content_dup));
-                	else
-                        	add_back(&cmd, ft_lstnew(tmp->type, content_dup));
-                	tmp = tmp->next;  
-              	}
-		if (cmd && dir)
-			add_back_mdl(&node, ft_lstnew_mdl(cmd, dir));
-		if (tmp)
-        		tmp = tmp->next;
-        }
-	m_list *new = node;
-	while(new)
+    t_token	*cmd ;
+    t_token	*rid;
+    m_list	*node;
+    t_token	*tmp ;
+    char	*dup_cont;
+    
+    (1) && (cmd = NULL, rid = NULL, node = NULL, tmp = head);
+    while (tmp) 
+    {
+        while (tmp && tmp->type != PIPE && tmp->type != SPC) 
 	{
-		printf("cmd= %s dir= %d\n", new->cmond->content, new->dir->type);
-		new = new->next;
-	}
-	return (node);
+            dup_cont = ft_strdup(tmp->content);
+            if (tmp->type == HER_DOC || tmp->type == OUT || tmp->type == IN || tmp->type == APPEND_OUT) 
+                add_back(&rid, ft_lstnew(tmp->type, dup_cont));
+            else 
+                add_back(&cmd, ft_lstnew(tmp->type, dup_cont));
+            tmp = tmp->next;
+        }
+        add_back_mdl(&node, ft_lstnew_mdl(cmd, rid));
+       (1) && (cmd = NULL, rid = NULL);
+        if (tmp)
+            tmp = tmp->next;
+    }
+    /*---------- this part just for test--------------------*/
+    while (node) 
+    {
+        while (node->cmond) 
+	{
+            printf("cmd= %s\n",  node->cmond->content);
+           node->cmond =  node->cmond->next;
+        }
+        while (node->dir) 
+	{
+            printf("dir= %d\n", node->dir->type);
+            node->dir = node->dir->next;
+        }
+       node = node->next;
+    }
+    return (node);
 }
-
