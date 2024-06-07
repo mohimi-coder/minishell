@@ -6,7 +6,7 @@
 /*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 19:09:19 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/07 13:09:37 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/07 19:03:57 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	add_export(char **s, char *str, t_env *new, t_env *env)
 	i = 0;
 	while (s[0][i])
 	{
-		if (s[0][i] == '+' && !s[0][i + 1] && s[1])
+		if (s[0][i] == '+' && !s[0][i + 1] && ft_strchr(str, '='))
 		{
 			ft_concatenate(s, str, new, env);
 			ft_free_leak(s);
