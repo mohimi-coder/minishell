@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   putspaces.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:44:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/05 18:45:45 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/06 18:55:14 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_puspaces(char *av, t_env **env)
 {
 	t_token	*token;
-	m_list *tmp;
+	t_token	*new;
 	int		i;
 
 	(1) && (token = NULL);
@@ -37,9 +37,11 @@ void	ft_puspaces(char *av, t_env **env)
 			pipe_word(av, &token, &i);
 	}
 	ft_herdoc(token, *env);
-	tmp = midl_list(token);
-	(ft_expand(token, *env), ft_builtins(token, env), ft_lstclear(&token));
-	// ft_lstclear_env(env);
+	ft_expand(token, *env);
+	new = new_list(token);
+	ft_lstclear(&token);
+	(ft_builtins(new, env));
+	ft_lstclear(&new);
 	return ;
 }
 

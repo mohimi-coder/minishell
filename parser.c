@@ -6,7 +6,7 @@
 /*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:25:07 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/31 12:59:34 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:12:08 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ void	double_quotes(char *av, t_token **token, int *i)
 	while (av[*i] != 34 && av[*i])
 		(*i)++;
 	if (!av[*i])
+	{
 		(ft_lstclear(token), \
 			ft_error_message(RED BOLD"➥  unclosed quotes 📛" RESET));
+		return ;
+	}
 	str = ft_substr(av, start + 1, ++(*i) - start - 2);
 	add_back(token, ft_lstnew(DOUBLE_QUOTES, str));
 }
@@ -40,8 +43,11 @@ void	handle_quotes(char *av, t_token **token, int *i)
 		while (av[*i] != 39 && av[*i])
 			(*i)++;
 		if (!av[*i])
+		{
 			(ft_lstclear(token), \
 				ft_error_message(RED BOLD"➥  unclosed quotes📛" RESET));
+			return ;
+		}
 		str = ft_substr(av, start + 1, ++(*i) - start - 2);
 		add_back(token, ft_lstnew(SINGLE_QUOTE, str));
 	}

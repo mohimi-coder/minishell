@@ -6,7 +6,7 @@
 /*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 14:43:38 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/04 12:37:52 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/06 19:06:04 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ void	ft_exit(t_token *token)
 		printf("exit\n");
 		exit(0);
 	}
-	s = token->next->next->content;
+	s = token->next->content;
 	exit(ft_atoi(s));
 }

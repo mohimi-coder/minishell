@@ -6,7 +6,7 @@
 /*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 18:01:42 by mohimi            #+#    #+#             */
-/*   Updated: 2024/05/31 19:32:52 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/07 13:10:56 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,4 @@ void	ft_lstclear_env(t_env **lst)
 		free(tmp);
 	}
 	*lst = NULL;
-}
-
-void	ft_lstdelone(t_env *lst)
-{
-	if (!lst)
-		return ;
-	free(lst->key);
-	free(lst->val);
-	free(lst);
-	lst = NULL;
 }

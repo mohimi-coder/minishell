@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/05 22:59:18 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/07 13:08:55 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@
 # define VAR 10
 # define DOUBLE_DOLLAR 11
 # define DOLLAR_WHY 12
+# define CMD 13
 
 typedef struct var
 {
@@ -133,6 +134,9 @@ void	ft_export_var(t_env *env, t_token *token);
 t_env	*ft_check_var(char *str, t_env *env);
 void	ft_cd(t_token *token);
 void	ft_exit(t_token *token);
+void	ft_unset(t_env **env, t_token *token);
+void	ft_env(t_env *env);
+void	ft_index(t_env *tmp, t_env *env);
 /*-------------------herdoc functions-------------------------------*/
 void	ft_putendl_fd(char *s, int fd);
 char	*ft_strjoin_her(char *s1, char *s2);
@@ -140,7 +144,7 @@ char	*ft_itoa(int n);
 char	*ft_expand_dollar_her(char *s, t_env *env);
 void	ft_herdoc(t_token *token, t_env *env);
 /*------------------fill midl list------------------------------------*/
-m_list	*ft_lstlast_mdl(m_list *lst);
+t_token *new_list(t_token *head);
 m_list	*ft_lstnew_mdl(t_token *cmond, t_token *dir);
 void	add_back_mdl(m_list **lst, m_list *new);
 m_list	*midl_list(t_token *head);
