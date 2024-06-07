@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/07 13:08:55 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/07 18:34:19 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ typedef struct env
 }			t_env;
 
 /*---------------------new struct-----------------------------*/
-typedef struct midle_list
-{
-	t_token			*cmond;
-	t_token 		*dir;
-	struct midle_list	*next;	
-} 				m_list;
+// typedef struct midle_list
+// {
+// 	t_token				*cmond;
+// 	t_token				*dir;
+// 	struct midle_list	*next;	
+// }						m_list;
 
 /*--------------------------lexer----------------------------*/
 void	signals(void);
@@ -142,10 +142,10 @@ void	ft_putendl_fd(char *s, int fd);
 char	*ft_strjoin_her(char *s1, char *s2);
 char	*ft_itoa(int n);
 char	*ft_expand_dollar_her(char *s, t_env *env);
-void	ft_herdoc(t_token *token, t_env *env);
+t_token	*ft_herdoc(t_token *token, t_env *env);
 /*------------------fill midl list------------------------------------*/
-t_token *new_list(t_token *head);
-m_list	*ft_lstnew_mdl(t_token *cmond, t_token *dir);
-void	add_back_mdl(m_list **lst, m_list *new);
-m_list	*midl_list(t_token *head);
+t_token	*new_list(t_token *head);
+// m_list	*ft_lstnew_mdl(t_token *cmond, t_token *dir);
+// void	add_back_mdl(m_list **lst, m_list *new);
+// m_list	*midl_list(t_token *head);
 #endif

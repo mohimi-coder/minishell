@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:02:29 by mohimi            #+#    #+#             */
-/*   Updated: 2024/06/02 19:02:38 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/07 18:12:53 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,33 +82,38 @@ char	*ft_itoa(int n)
 	return (arr[11] = '\0', ft_strdup(&arr[i]));
 }
 
+static void	handle_variable(t_var *v, char *s, t_env *env)
+{
+	v->start = v->i;
+	if (s[v->i + 1] >= '0' && s[v->i + 1] <= '9')
+		v->i++;
+	else
+		while (s[v->i + 1] && (f_alnum(s[v->i + 1]) || s[v->i + 1] == '_'))
+			v->i++;
+	v->st = ft_substr(s, v->start, ++v->i - v->start);
+	v->tmp = ft_expand_var(v->st, env);
+	v->join = ft_strjoin(v->join, v->tmp);
+}
+
 char	*ft_expand_dollar_her(char *s, t_env *env)
 {
 	t_var	v;
 
-	(1 == 1) && (v.i = 0, v.join = NULL, v.tmp = NULL);
+	v.i = 0;
+	v.join = NULL;
+	v.tmp = NULL;
 	while (s[v.i])
 	{
 		if (s[v.i] == '$' && (f_alnum(s[v.i + 1]) || s[v.i + 1] == '_'))
-		{
-			v.start = v.i;
-			if (s[v.i + 1] >= '0' && s[v.i + 1] <= '9')
-				v.i++;
-			else
-				while (s[v.i + 1] && (f_alnum(s[v.i + 1]) || s[v.i + 1] == '_'))
-					v.i++;
-			v.st = ft_substr(s, v.start, ++v.i - v.start);
-			v.tmp = ft_expand_var(v.st, env);
-			(v.join = ft_strjoin(v.join, v.tmp));
-		}
+			handle_variable(&v, s, env);
 		else
 		{
 			v.tmp = ft_substr(s, v.i, 1);
-			(v.join = ft_strjoin(v.join, v.tmp));
+			v.join = ft_strjoin(v.join, v.tmp);
 			v.i++;
 		}
 	}
 	if (!v.join)
 		v.join = ft_strdup("");
-	return v.join;
+	return (v.join);
 }

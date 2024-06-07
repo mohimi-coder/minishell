@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:57:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/07 13:06:13 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/07 18:28:50 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_pwd(void)
 
 	pwd = getcwd(buff, 4096);
 	printf("%s\n", buff);
-	// free (pwd);
+	free (pwd);
 }
 
 void	ft_builtins(t_token *token, t_env **env)
@@ -40,4 +40,38 @@ void	ft_builtins(t_token *token, t_env **env)
 			ft_exit(token);
 		token = token->next;
 	}
+}
+
+int	ft_strcmp(char const *s1, char const *s2)
+{
+	size_t	i;
+
+	i = 0;
+	if (!s1 || !s2)
+		return (1);
+	while ((s1[i] && s2[i]))
+	{
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+char	*ft_strchr(char *s, char c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+		{
+			return ((char *)s + i);
+		}
+		i++;
+	}
+	if (s[i] == c)
+		return (s + i);
+	return (0);
 }
