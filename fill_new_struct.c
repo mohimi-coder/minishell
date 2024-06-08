@@ -6,7 +6,7 @@
 /*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:32:27 by mohimi            #+#    #+#             */
-/*   Updated: 2024/06/07 12:05:05 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/08 16:41:02 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,31 +48,50 @@ int	is_cmd(int type)
 	return (0);
 }
 
-t_token	*new_list(t_token *head)
+void	skip_red(t_token **lst, t_token *new)
+{
+	if ((*lst)->type == PIPE)
+	{
+		add_back(&new, ft_lstnew((*lst)->type, ft_strdup((*lst)->content)));
+		*lst = (*lst)->next;
+	}
+	else
+	{
+		if ((*lst)->next->type == SPC)
+		{
+			add_back(&new, ft_lstnew((*lst)->type,
+					ft_strdup((*lst)->next->next->content)));
+			(*lst) = (*lst)->next;
+		}
+		else
+			add_back(&new, ft_lstnew((*lst)->type,
+					ft_strdup((*lst)->next->content)));
+		*lst = (*lst)->next->next;
+	}
+}
+
+t_token	*new_list(t_token *lst)
 {
 	t_token	*new;
 	char	*join;
 
 	new = NULL;
-	while (head)
+	while (lst)
 	{
-		if (is_cmd(head->type))
+		if (is_cmd(lst->type))
 		{
 			join = NULL;
-			while (head && is_cmd(head->type))
+			while (lst && is_cmd(lst->type))
 			{
-				join = ft_strjoin2(join, head->content);
-				head = head->next;
+				join = ft_strjoin2(join, lst->content);
+				lst = lst->next;
 			}
 			add_back(&new, ft_lstnew(CMD, ft_strdup(join)));
 		}
-		else if (head->type == SPC)
-			head = head->next;
+		else if (lst->type == SPC)
+			lst = lst->next;
 		else
-		{
-			add_back(&new, ft_lstnew(head->type, ft_strdup(head->content)));
-			head = head->next;
-		}
+			skip_red(&lst, new);
 	}
 	return (new);
 }
