@@ -6,11 +6,23 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:57:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/07 18:28:50 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/09 10:01:38 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+}
 
 void	ft_pwd(void)
 {
@@ -19,7 +31,7 @@ void	ft_pwd(void)
 
 	pwd = getcwd(buff, 4096);
 	printf("%s\n", buff);
-	free (pwd);
+	// free (pwd);
 }
 
 void	ft_builtins(t_token *token, t_env **env)

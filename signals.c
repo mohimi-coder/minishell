@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 15:50:01 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/02 22:17:46 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/09 10:03:37 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	sig_int(int sig_num)
 
 void	signals(void)
 {
+	rl_catch_signals = 0;
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_int);
 }
