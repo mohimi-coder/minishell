@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:57:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/09 10:01:38 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/09 19:34:39 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,26 @@ void	ft_pwd(void)
 	// free (pwd);
 }
 
-void	ft_builtins(t_token *token, t_env **env)
+void	ft_builtins(t_list *token, t_env **env)
 {
+	int	i;
+
+	i = 0;
 	while (token)
 	{
-		if (!ft_strcmp(token->content, "env"))
+	
+		if (!ft_strcmp(token->cmond[0], "env"))
 			ft_env(*env);
-		if (!ft_strcmp(token->content, "export"))
-			ft_export_var(*env, token);
-		if (!ft_strcmp(token->content, "unset"))
-			ft_unset(env, token);
-		if (!ft_strcmp(token->content, "pwd"))
+		if (!ft_strcmp(token->cmond[0], "export"))
+			ft_export_var(*env, token->cmond);
+		if (!ft_strcmp(token->cmond[0], "unset"))
+			ft_unset(env, token->cmond);
+		if (!ft_strcmp(token->cmond[0], "pwd"))
 			ft_pwd();
-		if (!ft_strcmp(token->content, "cd"))
-			ft_cd(token);
-		if (!ft_strcmp(token->content, "exit"))
-			ft_exit(token);
+		if (!ft_strcmp(token->cmond[0], "cd"))
+			ft_cd(token->cmond);
+		if (!ft_strcmp(token->cmond[0], "exit"))
+			ft_exit(token->cmond);
 		token = token->next;
 	}
 }

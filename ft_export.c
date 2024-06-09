@@ -6,7 +6,7 @@
 /*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 19:09:19 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/07 19:03:57 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/09 19:32:43 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,29 +94,31 @@ void	ft_update(char *str, t_env *env, t_env *new, char **s)
 	ft_free_leak(s);
 }
 
-void	ft_export_var(t_env *env, t_token *token)
+void	ft_export_var(t_env *env, char **cmd)
 {
 	char	**s;
 	t_env	*new;
+	int		i;
 
-	if (!token->next || token->next->type != CMD)
+	if (!cmd[1])
 		return (ft_export(env));
-	while (token->next && token->next->type == CMD)
+	i = 1;
+	while (cmd[i])
 	{
-		(1) && (new = NULL, s = ft_split(token->next->content, '='));
+		(1) && (new = NULL, s = ft_split(cmd[i], '='));
 		if (!s)
 			return ;
-		if (!add_export(s, token->next->content, new, env))
+		if (!add_export(s, cmd[i], new, env))
 		{
 			if (ft_check_var(s[0], env))
-				ft_update(token->next->content, env, new, s);
+				ft_update(cmd[i], env, new, s);
 			else
 			{
 				new = lstnew_env(ft_strdup(s[0]),
-						ft_strdup(ft_strchr(token->next->content, '=')));
+						ft_strdup(ft_strchr(cmd[i], '=')));
 				(add_back_env(&env, new), ft_free_leak(s));
 			}
 		}
-		token = token->next;
+		i++;
 	}
 }

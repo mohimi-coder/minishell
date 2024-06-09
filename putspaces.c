@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   putspaces.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:44:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/09 11:50:19 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/09 18:44:43 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_puspaces(char *av, t_env **env)
 	// 	tmp = tmp->next;
 	// }
 	ft_lstclear(&token);
-	(ft_builtins(new, env));
+	(ft_builtins(final_list, env));
 	ft_lstclear(&new);
 	ft_lstclear(&rep_herd);
 	return ;

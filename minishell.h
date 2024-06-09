@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/09 09:33:02 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/09 19:34:08 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,12 +129,12 @@ char	*ft_expand_var(char *str, t_env *env);
 void	ft_expand(t_token *token, t_env *env);
 void	ft_expand_dollar(t_token *tok, char *str, t_env *env);
 /*------------------------Builtins-----------------------------------*/
-void	ft_builtins(t_token *token, t_env **env);
-void	ft_export_var(t_env *env, t_token *token);
+void	ft_builtins(t_list *token, t_env **env);
+void	ft_export_var(t_env *env, char **cmd);
 t_env	*ft_check_var(char *str, t_env *env);
-void	ft_cd(t_token *token);
-void	ft_exit(t_token *token);
-void	ft_unset(t_env **env, t_token *token);
+void	ft_cd(char **cmd);
+void	ft_exit(char **cmd);
+void	ft_unset(t_env **env, char **cmd);
 void	ft_env(t_env *env);
 void	ft_index(t_env *tmp, t_env *env);
 /*-------------------herdoc functions-------------------------------*/

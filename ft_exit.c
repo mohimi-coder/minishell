@@ -6,7 +6,7 @@
 /*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 14:43:38 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/06 19:06:04 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/09 19:22:37 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,12 @@ int	ft_atoi(char *str)
 	return (res * sign);
 }
 
-void	ft_exit(t_token *token)
+void	ft_exit(char **cmd)
 {
-	char	*s;
-
-	if (!token->next)
+	if (!cmd[1])
 	{
 		printf("exit\n");
 		exit(0);
 	}
-	s = token->next->content;
-	exit(ft_atoi(s));
+	exit(ft_atoi(cmd[1]));
 }

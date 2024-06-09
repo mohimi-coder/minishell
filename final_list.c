@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   final_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 08:58:03 by mohimi            #+#    #+#             */
-/*   Updated: 2024/06/09 10:13:39 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/09 19:38:39 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_cmd(t_token *tmp_tmp, int count_cmd, t_list **final)
+void	ft_cmd(t_token *tmp_tmp, int count_cmd, t_list **final)
 {
 	char	**str;
 	t_token	*redire;
 	int		i;
-	
+
 	(1) && (str = NULL, redire = NULL, i = 0);
 	str = malloc(sizeof(char *) * (count_cmd + 1));
 	if (!str)
-		return;
+		return ;
 	while (tmp_tmp && tmp_tmp->type != PIPE)
 	{
 		if (tmp_tmp->type == CMD)
