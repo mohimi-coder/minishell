@@ -1,15 +1,18 @@
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
+FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
-FILE =  parser_utils.c parser_utils2.c \
-		parser.c putspaces.c \
-		lists.c libft_helper.c \
-		syntax_errors.c ft_split.c env_list.c \
-		ft_expand.c ft_builtins.c ft_export.c \
-		ft_cd.c ft_exit.c signals.c herdoc.c \
-		utils_her.c fill_new_struct.c ft_env.c ft_unset.c \
-		final_list.c last_list.c \
+FILE =  ./parcing/parser_utils.c ./parcing/parser_utils2.c \
+		./parcing/parser.c \
+		./builtins/ft_builtins.c ./builtins/ft_export.c \
+		./builtins/ft_cd.c ./builtins/ft_exit.c \
+		./builtins/ft_echo.c ./builtins/ft_env.c ./builtins/ft_unset.c \
+		./lists/fill_new_struct.c ./lists/env_list.c \
+		./lists/final_list.c ./lists/utils_last_list.c ./lists/lists.c \
+		./expend_and_herdoc/ft_expand.c \
+		./expend_and_herdoc/herdoc.c ./expend_and_herdoc/utils_her.c \
+		minishell.c libft_helper.c \
+		syntax_errors.c ft_split.c signals.c \
 
 OBJECT_FILE = $(FILE:.c=.o)
 

@@ -6,11 +6,11 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:04:48 by mohimi            #+#    #+#             */
-/*   Updated: 2024/06/07 18:11:13 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/10 10:22:05 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 char	*read_and_expand(char *delimiter, int flag, t_env *env)
 {

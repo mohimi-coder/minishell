@@ -6,11 +6,11 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:00:42 by mohimi            #+#    #+#             */
-/*   Updated: 2024/06/05 20:53:42 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/10 09:41:53 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 t_token	*ft_lstnew(int type, char *content)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:57:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/09 19:34:39 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/10 09:28:48 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {
@@ -54,6 +54,8 @@ void	ft_builtins(t_list *token, t_env **env)
 			ft_cd(token->cmond);
 		if (!ft_strcmp(token->cmond[0], "exit"))
 			ft_exit(token->cmond);
+		if (!ft_strcmp(token->cmond[0], "echo"))
+			ft_echo(token);
 		token = token->next;
 	}
 }

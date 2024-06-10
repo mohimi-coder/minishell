@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   final_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 08:58:03 by mohimi            #+#    #+#             */
-/*   Updated: 2024/06/09 19:38:39 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/10 09:41:47 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	ft_cmd(t_token *tmp_tmp, int count_cmd, t_list **final)
 {

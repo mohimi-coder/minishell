@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 11:04:30 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/09 19:24:29 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/10 09:29:22 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	ft_cd(char **cmd)
 {

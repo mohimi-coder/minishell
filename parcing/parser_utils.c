@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:48:44 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/05/31 18:27:14 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/10 09:32:44 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	ft_strlen(char *str)
 {

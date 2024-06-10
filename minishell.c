@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   putspaces.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:44:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/09 18:44:43 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/10 10:08:33 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	minishell_loop(char *input, char **env)
 	while (1)
 	{
 		signals();
-		input = readline(PURPLE"╰┈➤ Shell-Z.M ✗ "RESET);
+		input = readline(PURPLE BG_MAGENTA"╰┈➤ Shell-Z.M ✗ "BG_MAGENTA RESET);
 		if (!input)
 			(printf("exit\n"), exit(0));
 		ft_puspaces(input, &envr);

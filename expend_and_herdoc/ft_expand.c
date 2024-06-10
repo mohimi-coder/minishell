@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:23 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/08 14:29:53 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/10 10:21:51 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 char	*ft_expand_var(char *str, t_env *env)
 {

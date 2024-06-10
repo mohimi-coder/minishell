@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 19:09:19 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/09 19:32:43 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/10 09:29:07 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	ft_export(t_env *env)
 {
@@ -24,11 +24,11 @@ void	ft_export(t_env *env)
 	{
 		if (tmp->index == i)
 		{
-			printf("declare -x %s", tmp->key);
+			printf(YELLOW"declare -x %s"RESET, tmp->key);
 			if (tmp->val)
 			{
 				printf("%c", tmp->val[0]);
-				printf("\"%s\"", tmp->val + 1);
+				printf(GREEN"\"%s\""RESET, tmp->val + 1);
 			}
 			printf("\n");
 			i++;

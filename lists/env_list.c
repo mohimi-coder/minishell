@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 18:01:42 by mohimi            #+#    #+#             */
-/*   Updated: 2024/06/07 13:10:56 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/10 09:41:36 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 t_env	*lstnew_env(char *key, char *val)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fill_new_struct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:32:27 by mohimi            #+#    #+#             */
-/*   Updated: 2024/06/08 16:41:02 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/10 09:41:42 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 char	*ft_strjoin2(char *s1, char *s2)
 {

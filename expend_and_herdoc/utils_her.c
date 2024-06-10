@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_her.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:02:29 by mohimi            #+#    #+#             */
-/*   Updated: 2024/06/08 17:16:09 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/10 10:22:11 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	ft_putendl_fd(char *s, int fd)
 {

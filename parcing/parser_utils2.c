@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:50:53 by mohimi            #+#    #+#             */
-/*   Updated: 2024/06/02 18:50:15 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/10 09:32:49 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	handle_spaces(char *av, t_token **token, int *i)
 {

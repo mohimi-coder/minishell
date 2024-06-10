@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 14:43:38 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/09 19:22:37 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/10 09:29:41 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	ft_atoi(char *str)
 {

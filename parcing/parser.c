@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:25:07 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/06 18:12:08 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/10 09:32:54 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	double_quotes(char *av, t_token **token, int *i)
 {

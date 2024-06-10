@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 13:04:28 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/07 13:08:44 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/10 09:30:17 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	ft_index(t_env *tmp, t_env *env)
 {
