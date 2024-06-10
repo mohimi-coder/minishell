@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 19:09:19 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/10 09:29:07 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/10 16:48:53 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	add_export(char **s, char *str, t_env *new, t_env *env)
 	int	i;
 
 	i = 0;
+	printf("%s\n", str);
 	while (s[0][i])
 	{
 		if (s[0][i] == '+' && !s[0][i + 1] && ft_strchr(str, '='))
@@ -105,8 +106,10 @@ void	ft_export_var(t_env *env, char **cmd)
 	i = 1;
 	while (cmd[i])
 	{
+		if (!((cmd[i][0] >= 'a' && cmd[i][0] <= 'z') || (cmd[i][0] >= 'A' && cmd[i][0] <= 'Z')) || (cmd[i][0] == '_'))
+			return(printf(RED"%s ➥ %s: not an identifier❗%s\n", cmd[0], cmd[1], RESET));
 		(1) && (new = NULL, s = ft_split(cmd[i], '='));
-		if (!s)
+		if (!s[0])	
 			return ;
 		if (!add_export(s, cmd[i], new, env))
 		{
