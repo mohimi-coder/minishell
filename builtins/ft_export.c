@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 19:09:19 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/10 16:48:53 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/11 16:58:32 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ int	add_export(char **s, char *str, t_env *new, t_env *env)
 	int	i;
 
 	i = 0;
-	printf("%s\n", str);
-	while (s[0][i])
+	while (s[0] && s[0][i])
 	{
 		if (s[0][i] == '+' && !s[0][i + 1] && ft_strchr(str, '='))
 		{
@@ -75,10 +74,8 @@ int	add_export(char **s, char *str, t_env *new, t_env *env)
 		}
 		if ((!(f_alnum(s[0][i]) || s[0][i] == '_'))
 			|| (s[0][0] >= '0' && s[0][0] <= '9'))
-		{
-			printf("%s ➥ %s: not an identifier❗%s\n", RED BOLD, s[0], RESET);
-			return (1);
-		}
+			return (printf("%s ➥ %s%s: not an identifier❗%s\n",
+					RED BOLD, s[0], ft_strchr(str, '='), RESET), 1);
 		i++;
 	}
 	return (0);
@@ -95,23 +92,48 @@ void	ft_update(char *str, t_env *env, t_env *new, char **s)
 	ft_free_leak(s);
 }
 
+int	check_empty(char **cmd)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	j = 1;
+	while (cmd[j])
+	{
+		if (cmd[j][0] == '\0')
+			i++;
+		j++;
+	}
+	if (i == j)
+		return (0);
+	return (1);
+}
+
+int	check_cmd(char *cmd)
+{
+	if (!cmd[0])
+		return (1);
+	if ((cmd[0] >= '0' && cmd[0] <= '9') || (cmd[0] == '+' || cmd[0] == '='))
+		return (printf("%s ➥ %s: not an identifier❗%s\n", RED BOLD, cmd, RESET), 1);
+	return (0);
+}
+
 void	ft_export_var(t_env *env, char **cmd)
 {
 	char	**s;
 	t_env	*new;
 	int		i;
 
-	if (!cmd[1])
+	if (!cmd[1] || !check_empty(cmd))
 		return (ft_export(env));
 	i = 1;
 	while (cmd[i])
 	{
-		if (!((cmd[i][0] >= 'a' && cmd[i][0] <= 'z') || (cmd[i][0] >= 'A' && cmd[i][0] <= 'Z')) || (cmd[i][0] == '_'))
-			return(printf(RED"%s ➥ %s: not an identifier❗%s\n", cmd[0], cmd[1], RESET));
 		(1) && (new = NULL, s = ft_split(cmd[i], '='));
-		if (!s[0])	
+		if (!s)	
 			return ;
-		if (!add_export(s, cmd[i], new, env))
+		if (!check_cmd(cmd[i]) && !add_export(s, cmd[i], new, env))
 		{
 			if (ft_check_var(s[0], env))
 				ft_update(cmd[i], env, new, s);
