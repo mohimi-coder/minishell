@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/09 22:45:52 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/11 22:02:16 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void	ft_expand_dollar(t_token *tok, char *str, t_env *env);
 void	ft_builtins(t_list *token, t_env **env);
 void	ft_export_var(t_env *env, char **cmd);
 t_env	*ft_check_var(char *str, t_env *env);
-void	ft_cd(char **cmd);
+void	ft_cd(char **cmd, t_env **env);
 void	ft_exit(char **cmd);
 void	ft_unset(t_env **env, char **cmd);
 void	ft_env(t_env *env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:57:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/10 09:28:48 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/11 21:48:42 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_builtins(t_list *token, t_env **env)
 		if (!ft_strcmp(token->cmond[0], "pwd"))
 			ft_pwd();
 		if (!ft_strcmp(token->cmond[0], "cd"))
-			ft_cd(token->cmond);
+			ft_cd(token->cmond, env);
 		if (!ft_strcmp(token->cmond[0], "exit"))
 			ft_exit(token->cmond);
 		if (!ft_strcmp(token->cmond[0], "echo"))

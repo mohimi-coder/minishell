@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:44:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/11 21:46:10 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/11 22:42:35 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_fill_env(char **env, t_env **envr)
 	{
 		add_back_env(envr, lstnew_env(ft_strdup("PATH"), ft_strdup\
 ("=/Users/mohimi/.docker/bin:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.")));
-		add_back_env(envr, lstnew_env(ft_strdup("PWD"), ft_strdup(getcwd(NULL, 0))));
+		add_back_env(envr, lstnew_env(ft_strdup("PWD"), ft_strjoin(ft_strdup("="), ft_strdup(getcwd(NULL, 0)))));
 		add_back_env(envr, lstnew_env(ft_strdup("SHLVL"), ft_strdup("=2")));
 		add_back_env(envr, lstnew_env(ft_strdup("OLDPWD"),  NULL));
 		add_back_env(envr, lstnew_env(ft_strdup("_"), ft_strdup("=/usr/bin/env")));
