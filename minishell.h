@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/11 22:02:16 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/06/12 19:07:35 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@
 # define PURPLE "\033[01;35m"
 # define RESET "\x1b[0m"
 /*------------------------------baground------------------------------------*/
-#define BG_BLACK    "\x1b[40m"
-#define BG_RED      "\x1b[41m"
-#define BG_GREEN    "\x1b[42m"
-#define BG_YELLOW   "\x1b[43m"
-#define BG_BLUE     "\x1b[44m"
-#define BG_MAGENTA  "\x1b[45m"
-#define BG_CYAN     "\x1b[46m"
-#define BG_WHITE    "\x1b[47m"
+# define BG_BLACK    "\x1b[40m"
+# define BG_RED      "\x1b[41m"
+# define BG_GREEN    "\x1b[42m"
+# define BG_YELLOW   "\x1b[43m"
+# define BG_BLUE     "\x1b[44m"
+# define BG_MAGENTA  "\x1b[45m"
+# define BG_CYAN     "\x1b[46m"
+# define BG_WHITE    "\x1b[47m"
 
 /*----------------------------------Tokenization-----------------------------*/
 
@@ -144,19 +144,24 @@ t_env	*ft_check_var(char *str, t_env *env);
 void	ft_cd(char **cmd, t_env **env);
 void	ft_exit(char **cmd);
 void	ft_unset(t_env **env, char **cmd);
+void	ft_fill_env(char **env, t_env **envr);
 void	ft_env(t_env *env);
 void	ft_index(t_env *tmp, t_env *env);
 void	ft_echo(t_list *list);
+void	ft_update(char *str, t_env *env, t_env *new, char **s);
+int		check_empty(char **cmd);
+int		check_cmd(char *cmd);
 /*-------------------herdoc functions-------------------------------*/
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putstr_fd(char *s, int fd);
-char	*ft_strjoin_her(char *s1, char *s2);
+char	*join_her(char *s1, char *s2);
 char	*ft_itoa(int n);
-char	*ft_expand_dollar_her(char *s, t_env *env);
+char	*epnd__her(char *s, t_env *env);
 t_token	*ft_herdoc(t_token *token, t_env *env);
+void	add_newline(char *str, char *delimiter, char **buff);
 /*------------------fill midl list------------------------------------*/
 t_token	*new_list(t_token *head);
 t_list	*ft_lstnew_mdl(char **cmond, t_token *dir);
 void	add_back_mdl(t_list **lst, t_list *new);
-t_list *ft_finall(t_token *head);
+t_list	*ft_finall(t_token *head);
 #endif

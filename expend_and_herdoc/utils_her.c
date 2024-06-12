@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:02:29 by mohimi            #+#    #+#             */
-/*   Updated: 2024/06/10 10:22:11 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/12 18:45:09 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_putendl_fd(char *s, int fd)
 	write(fd, "\n", 1);
 }
 
-char	*ft_strjoin_her(char *s1, char *s2)
+char	*join_her(char *s1, char *s2)
 {
 	char	*str;
 	size_t	i;
@@ -97,7 +97,7 @@ static void	handle_variable(t_var *v, char *s, t_env *env)
 	v->join = ft_strjoin(v->join, v->tmp);
 }
 
-char	*ft_expand_dollar_her(char *s, t_env *env)
+char	*epnd__her(char *s, t_env *env)
 {
 	t_var	v;
 

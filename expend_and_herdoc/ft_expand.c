@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:23 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/10 10:21:51 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/12 18:11:28 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	ft_expand(t_token *token, t_env *env)
 			tmp->content = ft_expand_var(tmp->content, env);
 		else if (tmp->type == DOUBLE_QUOTES)
 			ft_expand_dollar(tmp, tmp->content, env);
-		// printf("%s\n", tmp->content);
 		tmp = tmp->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:04:48 by mohimi            #+#    #+#             */
-/*   Updated: 2024/06/10 10:22:05 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/12 19:09:49 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*read_and_expand(char *delimiter, int flag, t_env *env)
 {
 	char	*str;
-	char	*expanded;
+	char	*expn;
 	char	*buff;
 	char	*tmp;
 
@@ -24,18 +24,16 @@ char	*read_and_expand(char *delimiter, int flag, t_env *env)
 	{
 		if (flag == 0)
 		{
-			expanded = ft_expand_dollar_her(str, env);
-			tmp = ft_strjoin_her(buff, expanded);
-			(free(expanded), free(buff), buff = tmp);
+			(1) && (expn = epnd__her(str, env), tmp = join_her(buff, expn));
+			(free(expn), free(buff), buff = tmp);
 		}
 		else
 		{
-			tmp = ft_strjoin_her(buff, str);
+			tmp = join_her(buff, str);
 			(free(buff), buff = tmp);
 		}
 		(1) && (free(str), str = readline(YELLOW BOLD "heredoc 📝➥ " RESET));
-		if (ft_strcmp(str, delimiter))
-			(tmp = ft_strjoin_her(buff, "\n"), (free(buff), buff = tmp));
+		add_newline(str, delimiter, &buff);
 	}
 	return (free(delimiter), free(str), buff);
 }
@@ -44,10 +42,10 @@ char	*create_temp_file(char *buff, int *i)
 {
 	char	*file_name;
 	int		fd;
-	char 	*nbr;
+	char	*nbr;
 
 	nbr = ft_itoa(*i);
-	file_name = ft_strjoin_her("/tmp/file_", nbr);
+	file_name = join_her("/tmp/file_", nbr);
 	free(nbr);
 	fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0777);
 	if (fd < 0)
@@ -82,11 +80,11 @@ void	process_herdoc(t_token **new, t_token **tmp, t_env *env)
 		add_back(new, ft_lstnew((*tmp)->type, ft_strdup((*tmp)->content)));
 		(*tmp) = (*tmp)->next;
 	}
-	while (*tmp && (*tmp)->type != SPC && (*tmp)->type != OUT &&
-		   (*tmp)->type != APPEND_OUT && (*tmp)->type != IN &&
-		   (*tmp)->type != PIPE && (*tmp)->type != HER_DOC)
+	while (*tmp && (*tmp)->type != SPC && (*tmp)->type != OUT && \
+		(*tmp)->type != APPEND_OUT && (*tmp)->type != IN && \
+		(*tmp)->type != PIPE && (*tmp)->type != HER_DOC)
 	{
-		join = ft_strjoin_her(join, (*tmp)->content);
+		join = join_her(join, (*tmp)->content);
 		if ((*tmp)->type == DOUBLE_QUOTES || (*tmp)->type == SINGLE_QUOTE)
 			flag = 1;
 		*tmp = (*tmp)->next;
@@ -99,13 +97,13 @@ void	process_herdoc(t_token **new, t_token **tmp, t_env *env)
 t_token	*ft_herdoc(t_token *token, t_env *env)
 {
 	t_token	*tmp;
-	t_token *new = NULL;
+	t_token	*new;
 
-	tmp = token;
+	(1) && (new = NULL, tmp = token);
 	if (pipe_errors(token) || redirec_errors(token))
 	{
 		ft_error_message(RED BOLD "➥  syntax error❗" RESET);
-		return(NULL);
+		return (NULL);
 	}
 	while (tmp)
 	{
@@ -121,5 +119,5 @@ t_token	*ft_herdoc(t_token *token, t_env *env)
 			process_herdoc(&new, &tmp, env);
 		}
 	}
-	return(new);
+	return (new);
 }

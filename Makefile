@@ -6,11 +6,11 @@ FILE =  ./parcing/parser_utils.c ./parcing/parser_utils2.c \
 		./parcing/parser.c \
 		./builtins/ft_builtins.c ./builtins/ft_export.c \
 		./builtins/ft_cd.c ./builtins/ft_exit.c \
-		./builtins/ft_echo.c ./builtins/ft_env.c ./builtins/ft_unset.c \
+		./builtins/ft_echo.c ./builtins/ft_env.c ./builtins/ft_unset.c ./builtins/export_helper.c\
 		./lists/fill_new_struct.c ./lists/env_list.c \
 		./lists/final_list.c ./lists/utils_last_list.c ./lists/lists.c \
 		./expend_and_herdoc/ft_expand.c \
-		./expend_and_herdoc/herdoc.c ./expend_and_herdoc/utils_her.c \
+		./expend_and_herdoc/herdoc.c ./expend_and_herdoc/utils_her.c ./expend_and_herdoc/here_helper.c\
 		minishell.c libft_helper.c \
 		syntax_errors.c ft_split.c signals.c \
 
