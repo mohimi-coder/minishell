@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:21:21 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/07 18:24:43 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/06 18:25:14 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,18 @@ char	*ft_strjoin(char *s1, char *s2)
 		str[i++] = s2[j++];
 	str[i] = '\0';
 	return (free(s1), free(s2), str);
+}
+
+char	*ft_tolower(char *c)
+{
+	int	i;
+
+	i = 0;
+	while (c[i])
+	{
+		if (c[i] >= 'A' && c[i] <= 'Z')
+			c[i] = c[i] + 32;
+		i++;
+	}
+	return (c);
 }

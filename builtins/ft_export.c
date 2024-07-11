@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 19:09:19 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/12 18:05:38 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/02 20:34:46 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,13 @@ int	add_export(char **s, char *str, t_env *new, t_env *env)
 		}
 		if ((!(f_alnum(s[0][i]) || s[0][i] == '_'))
 			|| (s[0][0] >= '0' && s[0][0] <= '9'))
+		{
+			if (!ft_strchr(str, '='))
+				return (printf("%s ➥ %s: not an identifier❗%s\n",
+						RED BOLD, s[0], RESET), 1);
 			return (printf("%s ➥ %s%s: not an identifier❗%s\n",
 					RED BOLD, s[0], ft_strchr(str, '='), RESET), 1);
+		}
 		i++;
 	}
 	return (0);
@@ -87,7 +92,7 @@ void	ft_export_var(t_env *env, char **cmd)
 	t_env	*new;
 	int		i;
 
-	if (!cmd[1] || !check_empty(cmd))
+	if (!cmd[1])
 		return (ft_export(env));
 	i = 1;
 	while (cmd[i])

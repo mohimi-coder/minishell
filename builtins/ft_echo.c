@@ -6,7 +6,7 @@
 /*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 22:39:53 by mohimi            #+#    #+#             */
-/*   Updated: 2024/06/10 17:40:28 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/06 20:30:53 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,20 @@ void	ft_echo(t_list *list)
 	int	count;
 
 	(1) && (i = 1, count = 0);
-	while (list && list->cmond[i] && (list->cmond[i][0] == '-'
-		&& !n_check('n', list->cmond[i] + 1)))
+	if (!list)
+		return ;
+	while (list && list->cmd[i] && (list->cmd[i][0] == '-'
+		&& !n_check('n', list->cmd[i] + 1)))
 	{
 		count++;
 		i++;
 	}
-	while (list && list->cmond && list->cmond[i])
+	while (list && list->cmd && list->cmd[i])
 	{
-		if (list->cmond[i])
+		if (list->cmd[i])
 		{
-			ft_putstr_fd(list->cmond[i], 1);
-			if (list->cmond[i + 1])
+			ft_putstr_fd(list->cmd[i], 1);
+			if (list->cmd[i + 1])
 				ft_putstr_fd(" ", 1);
 		}
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:44:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/12 18:37:18 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/07 12:13:53 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ void	ft_puspaces(char *av, t_env **env)
 			pipe_word(av, &token, &i);
 	}
 	rep_herd = ft_herdoc(token, *env);
-	(ft_expand(rep_herd, *env)), (new = new_list(rep_herd));
+	(ft_expand(&rep_herd, *env)), (new = new_list(rep_herd));
 	final_list = ft_finall(new);
-	(ft_lstclear(&token), ft_builtins(final_list, env));
-	return (ft_lstclear(&new), ft_lstclear(&rep_herd));
+	if (final_list && !final_list->next && ft_builtins(final_list, env))
+		final_list = final_list->next;
+	execution(final_list, env);
+	return (ft_lstclear(&token), ft_lstclear(&new), ft_lstclear(&rep_herd), ft_lstclear_final(&final_list));
 }
 
 void	minishell_loop(char *input, char **env)

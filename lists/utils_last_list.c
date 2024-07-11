@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   utils_last_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 08:59:39 by mohimi            #+#    #+#             */
-/*   Updated: 2024/06/10 09:41:57 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/04 11:35:23 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_list	*ft_lstnew_mdl(char **cmond, t_token *dir)
+t_list	*ft_lstnew_mdl(char **cmd, t_token *dir)
 {
 	t_list	*new_node;
 
 	new_node = malloc(sizeof(t_list));
 	if (new_node == NULL)
 		return (NULL);
-	new_node->cmond = cmond;
+	new_node->cmd = cmd;
 	new_node->red = dir;
 	new_node->next = NULL;
 	return (new_node);
@@ -47,4 +47,22 @@ void	add_back_mdl(t_list **lst, t_list *new)
 	}
 	last = ft_lstlast_mdl(*lst);
 	last->next = new;
+}
+
+void	ft_lstclear_final(t_list **lst)
+{
+	t_list	*current;
+	t_list	*tmp;
+
+	if (!lst)
+		return ;
+	current = *lst;
+	while (current != NULL)
+	{
+		tmp = current;
+		current = current->next;
+		ft_free_leak(tmp->cmd);
+		free(tmp);
+	}
+	*lst = NULL;
 }

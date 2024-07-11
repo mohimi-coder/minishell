@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:57:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/12 18:09:45 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/06 18:43:34 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,26 @@ void	ft_pwd(void)
 	printf("%s\n", buff);
 }
 
-void	ft_builtins(t_list *token, t_env **env)
+int	ft_builtins(t_list *token, t_env **env)
 {
 	int	i;
 
 	i = 0;
-	while (token)
-	{
-		if (!ft_strcmp(token->cmond[0], "env"))
-			ft_env(*env);
-		if (!ft_strcmp(token->cmond[0], "export"))
-			ft_export_var(*env, token->cmond);
-		if (!ft_strcmp(token->cmond[0], "unset"))
-			ft_unset(env, token->cmond);
-		if (!ft_strcmp(token->cmond[0], "pwd"))
-			ft_pwd();
-		if (!ft_strcmp(token->cmond[0], "cd"))
-			ft_cd(token->cmond, env);
-		if (!ft_strcmp(token->cmond[0], "exit"))
-			ft_exit(token->cmond);
-		if (!ft_strcmp(token->cmond[0], "echo"))
-			ft_echo(token);
-		token = token->next;
-	}
+	if (!ft_strcmp(ft_tolower(token->cmd[0]), "env"))
+		(ft_env(*env), i = 1);
+	if (!ft_strcmp(token->cmd[0], "export"))
+		(ft_export_var(*env, token->cmd), i = 1);
+	if (!ft_strcmp(token->cmd[0], "unset"))
+		(ft_unset(env, token->cmd), i = 1);
+	if (!ft_strcmp(ft_tolower(token->cmd[0]), "pwd"))
+		(ft_pwd(), i = 1);
+	if (!ft_strcmp(token->cmd[0], "cd"))
+		(ft_cd(token->cmd, env), i = 1);
+	if (!ft_strcmp(token->cmd[0], "exit"))
+		(ft_exit(token->cmd), i = 1);
+	if (!ft_strcmp(ft_tolower(token->cmd[0]), "echo"))
+		(ft_echo(token), i = 1);
+	return (i);
 }
 
 int	ft_strcmp(char const *s1, char const *s2)
@@ -65,7 +62,7 @@ int	ft_strcmp(char const *s1, char const *s2)
 	i = 0;
 	if (!s1 || !s2)
 		return (1);
-	while ((s1[i] && s2[i]))
+	while (s1[i] != '\0' && s2[i] != '\0')
 	{
 		if (s1[i] != s2[i])
 			return ((unsigned char)s1[i] - (unsigned char)s2[i]);

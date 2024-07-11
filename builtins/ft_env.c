@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 13:04:28 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/12 18:35:58 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/06/12 19:25:04 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,6 @@ t_env	*ft_check_var(char *str, t_env *env)
 
 void	initialize_default_env(t_env **envr)
 {
-	add_back_env(envr, lstnew_env(ft_strdup("PATH"), \
-		ft_strdup("=/Users/mohimi/.docker/bin:/usr/gnu/bin:/usr/ \
-		local/bin:/bin:/usr/bin:.")));
 	add_back_env(envr, lstnew_env(ft_strdup("PWD"), \
 		ft_strjoin(ft_strdup("="), ft_strdup(getcwd(NULL, 0)))));
 	add_back_env(envr, lstnew_env(ft_strdup("SHLVL"), ft_strdup("=2")));
@@ -60,7 +57,6 @@ void	ft_fill_env(char **env, t_env **envr)
 {
 	int		i;
 	char	**sp;
-	t_env	*new;
 
 	i = 0;
 	if (!env[i])
@@ -73,8 +69,12 @@ void	ft_fill_env(char **env, t_env **envr)
 		sp = ft_split(env[i], '=');
 		if (!sp)
 			return ;
-		new = lstnew_env(ft_strdup(sp[0]), ft_strdup(ft_strchr(env[i], '=')));
-		(add_back_env(envr, new), ft_free_leak(sp));
+		if (!ft_strcmp(sp[0], "OLDPWD"))
+			add_back_env(envr, lstnew_env(ft_strdup("OLDPWD"), NULL));
+		else
+			(add_back_env(envr, lstnew_env(ft_strdup(sp[0]),
+						ft_strdup(ft_strchr(env[i], '=')))));
+		ft_free_leak(sp);
 		i++;
 	}
 	return ;
