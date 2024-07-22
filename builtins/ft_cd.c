@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 11:04:30 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/07 16:34:32 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/21 13:28:44 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,16 @@ void	ft_cd(char **cmd, t_env **env)
 		return ;
 	}
 	if (!cmd[1] || !ft_strcmp(cmd[1], "~"))
-		return (ft_update_pwd_home(old, node, buf, env));
+		return (ft_status(0, true), ft_update_pwd_home(old, node, buf, env));
 	(getcwd(buf, 4096), test = chdir(cmd[1]), cwd = getcwd(NULL, 0));
 	if (!access(cmd[1], F_OK) && access(cmd[1], R_OK))
-		printf("%s Permission denied: %s❗ %s\n", RED BOLD, cmd[1], RESET);
+		(printf("Permission denied: %s❗\n", cmd[1]), ft_status(1, true));
 	else if (!ft_strcmp(cmd[1], "..") && (test < 0 || !cwd))
-		(printf("%s getcwd : No such file or directory❗%s\n", RED BOLD, RESET),
+		(printf("getcwd : No such file or direct❗\n"), ft_status(1, true),
 			ft_update_pwd(old, node, buf));
 	else if (test >= 0)
-		ft_update_pwd(old, node, buf);
+		(ft_update_pwd(old, node, buf), ft_status(0, true));
 	else if (test < 0)
-		printf("%sNo such file or directory: %s❗%s\n", RED BOLD, cmd[1], RESET);
+		(printf("No such file or direct: %s❗\n", cmd[1]), ft_status(1, true));
 	free(cwd);
 }

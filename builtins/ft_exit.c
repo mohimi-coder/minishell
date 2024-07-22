@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 14:43:38 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/06/10 09:29:41 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/22 21:04:02 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ int	ft_atoi(char *str)
 		i++;
 	}
 	if (!str[i])
-		(ft_error_message(RED BOLD"numeric argument required❗" RESET), exit(0));
+		(write(2, "numeric argument required❗", 28), exit(255));
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = res * 10 + str[i] - 48;
 		i++;
 	}
 	if (str[i])
-		(ft_error_message(RED BOLD"numeric argument required❗" RESET), exit(0));
+		(write(2, "numeric argument required❗", 28), exit(255));
 	return (res * sign);
 }
 
@@ -43,8 +43,18 @@ void	ft_exit(char **cmd)
 {
 	if (!cmd[1])
 	{
-		printf("exit\n");
-		exit(0);
+		write(2, "exit\n", 5);
+		exit(ft_status(0, false));
 	}
-	exit(ft_atoi(cmd[1]));
+	if (ft_atoi(cmd[1]) && cmd[2])
+	{
+		write(2, "exit\n", 6);
+		write(2, "too many arguments\n", 19);
+		ft_status(1, true);
+	}
+	else
+	{
+		write(2, "exit\n", 5);
+		exit(ft_atoi(cmd[1]));
+	}
 }

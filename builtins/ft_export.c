@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 19:09:19 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/02 20:34:46 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/21 13:30:54 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ void	ft_concatenate(char **sp, char *str, t_env *new, t_env *env)
 int	add_export(char **s, char *str, t_env *new, t_env *env)
 {
 	int	i;
+	int	st;
 
-	i = 0;
+	(1) && (i = 0, st = ft_status(1, true));
 	while (s[0] && s[0][i])
 	{
 		if (s[0][i] == '+' && !s[0][i + 1] && ft_strchr(str, '='))
@@ -77,13 +78,14 @@ int	add_export(char **s, char *str, t_env *new, t_env *env)
 		{
 			if (!ft_strchr(str, '='))
 				return (printf("%s ➥ %s: not an identifier❗%s\n",
-						RED BOLD, s[0], RESET), 1);
+						RED BOLD, s[0], RESET), st);
 			return (printf("%s ➥ %s%s: not an identifier❗%s\n",
-					RED BOLD, s[0], ft_strchr(str, '='), RESET), 1);
+					RED BOLD, s[0], ft_strchr(str, '='), RESET), st);
 		}
 		i++;
 	}
-	return (0);
+	st = 0;
+	return (st);
 }
 
 void	ft_export_var(t_env *env, char **cmd)

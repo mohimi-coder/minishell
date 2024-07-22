@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   execution_helper.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 18:22:08 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/07 16:36:23 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/22 20:57:57 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void    print_no_cmd(char *cmd, char *msg)
+{
+    write(2, cmd, ft_strlen(cmd));
+    write(2, msg, ft_strlen(msg));
+}
 
 void	**ft_free2(char **arr)
 {
@@ -36,15 +42,15 @@ char	*get_path(char	*argv, char	**env)
 	int			i;
 	struct stat	file;
 
-	i = 0;
+	if (!argv[0])
+		(print_no_cmd("", ": command not found\n"), exit(127));
 	if (stat(argv, &file) == 0 && S_ISDIR(file.st_mode))
-		(dprintf(2, "%s%s :is a directory❗%s\n", RED BOLD, argv, RESET),
-			exit(126));
+		(write(2, ":is a directory\n", 17), exit(126));
 	if (argv[0] == '/')
 		return (ft_strdup(argv));
 	else if (argv[0] == '.')
 		return (ft_strdup(argv + 2));
-	path = split_path(env);
+	1 && (path = split_path(env), i = 0);
 	command = ft_strjoin(ft_strdup("/"), ft_strdup(argv));
 	while (path[i])
 	{
@@ -53,8 +59,7 @@ char	*get_path(char	*argv, char	**env)
 			return (free(command), ft_free2(path), res);
 		free(res);
 	}
-	(dprintf(2, "%s%s: command not found❗%s\n", RED BOLD, argv, RESET),
-		exit(1));
+	(print_no_cmd(argv, ": command not found\n"), exit(127));
 }
 
 char	**split_path(char **envp)

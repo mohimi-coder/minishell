@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 22:39:53 by mohimi            #+#    #+#             */
-/*   Updated: 2024/07/06 20:30:53 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/21 13:27:18 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ void	ft_echo(t_list *list)
 		return ;
 	while (list && list->cmd[i] && (list->cmd[i][0] == '-'
 		&& !n_check('n', list->cmd[i] + 1)))
-	{
-		count++;
-		i++;
-	}
+		((count++), (i++));
 	while (list && list->cmd && list->cmd[i])
 	{
 		if (list->cmd[i])
@@ -52,5 +49,6 @@ void	ft_echo(t_list *list)
 	}
 	if (count == 0)
 		ft_putstr_fd("\n", 1);
+	ft_status(0, true);
 	return ;
 }

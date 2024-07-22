@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:57:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/06 18:43:34 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:20:55 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_pwd(void)
 
 	pwd = getcwd(buff, 4096);
 	printf("%s\n", buff);
+	ft_status(0, true);
 }
 
 int	ft_builtins(t_list *token, t_env **env)
@@ -38,7 +39,7 @@ int	ft_builtins(t_list *token, t_env **env)
 	int	i;
 
 	i = 0;
-	if (!ft_strcmp(ft_tolower(token->cmd[0]), "env"))
+	if (!ft_strcmp(ft_tolower(token->cmd[0]), "env") && !token->cmd[1])
 		(ft_env(*env), i = 1);
 	if (!ft_strcmp(token->cmd[0], "export"))
 		(ft_export_var(*env, token->cmd), i = 1);

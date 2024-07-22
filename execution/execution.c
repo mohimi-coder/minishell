@@ -3,30 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:22:19 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/07 12:26:27 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/22 16:16:20 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+int	g_flag = 0;
+
 void	child1_func(int	*end, t_list *list, char *env[], t_env **tenv)
 {
 	char	*cmd;
+	int		id;
 
-	if (list->next && dup2(end[1], 1) < 0)
+	id = fork();
+	if (id < 0)
+		(perror("fork"), exit(EXIT_FAILURE));
+	if (id == 0)
 	{
+		if (list->next && dup2(end[1], 1) < 0)
+			((close(end[1]), close(end[0])), ft_perror("dup Error"));
 		(close(end[1]), close(end[0]));
-		ft_perror("dup Error");
+		if (check_red_files(list) < 0)
+			(ft_perror("error in opening files"), exit(ft_status(1, true)));
+		if (ft_builtins(list, tenv))
+			exit(ft_status(1, true));
+		cmd = get_path(list->cmd[0], env);
+		execve(cmd, list->cmd, env);
 	}
-	(close(end[1]), close(end[0]));
-	if (ft_builtins(list, tenv))
-		exit(1);
-	cmd = get_path(list->cmd[0], env);
-	execve(cmd, list->cmd, env);
-	ft_perror(list->cmd[0]);
+	if (!list->next)
+		exit_status(id);
 }
 
 void	child2_func(t_pipe	p, t_list *list, char *env[], t_env **tenv)
@@ -35,17 +44,25 @@ void	child2_func(t_pipe	p, t_list *list, char *env[], t_env **tenv)
 	int		id;
 
 	id = fork();
+	if (id < 0)
+		(perror("fork"), exit(EXIT_FAILURE));
 	if (id == 0)
 	{
 		if (dup2(p.in, 0) < 0)
 			(close(p.in), ft_perror("dup3 Error"));
 		(close(p.in));
+		if (check_red_files(list) < 0)
+		{
+			ft_perror("error in opening files");
+			exit(ft_status(1, true));
+		}
 		if (ft_builtins(list, tenv))
-			exit(1);
+			exit(ft_status(1, true));
 		cmd = get_path(list->cmd[0], env);
 		execve(cmd, list->cmd, env);
 		ft_perror(list->cmd[0]);
 	}
+	exit_status(id);
 }
 
 void	ft_child(t_list *tmp, char *env[], t_pipe	p, t_env **tenv)
@@ -62,8 +79,13 @@ void	ft_child(t_list *tmp, char *env[], t_pipe	p, t_env **tenv)
 		if (dup2(p.in, 0) < 0 || dup2(p.end2[1], 1) < 0)
 			ft_perror("dup Error");
 		(close(p.in), close(p.end2[1]));
+		if (check_red_files(tmp) < 0)
+		{
+			ft_perror("error in opening files");
+			exit(ft_status(1, true));
+		}
 		if (ft_builtins(tmp, tenv))
-			exit(1);
+			exit(ft_status(1, true));
 		cmd = get_path(tmp->cmd[0], env);
 		execve(cmd, tmp->cmd, env);
 		ft_perror(tmp->cmd[0]);
@@ -72,18 +94,13 @@ void	ft_child(t_list *tmp, char *env[], t_pipe	p, t_env **tenv)
 
 void	ft_pipe(t_list *list, char *env[], t_env **tenv)
 {
-	pid_t	pid1;
 	t_list	*tmp;
 	t_pipe	p;
 
 	tmp = list;
 	if (pipe(p.end) < 0)
 		ft_perror("error in pipe");
-	pid1 = fork();
-	if (pid1 < 0)
-		ft_perror("error in pid1");
-	if (pid1 == 0)
-		child1_func(p.end, list, env, tenv);
+	child1_func(p.end, list, env, tenv);
 	(close(p.end[1]), p.in = p.end[0], tmp = tmp->next);
 	while (tmp && tmp->next)
 	{
@@ -93,17 +110,26 @@ void	ft_pipe(t_list *list, char *env[], t_env **tenv)
 		(close(p.end2[1]), tmp = tmp->next);
 	}
 	if (tmp)
-		(child2_func(p, tmp, env, tenv), close(p.in));
+		(child2_func(p, tmp, env, tenv));
+	close(p.in);
 }
 
 void	execution(t_list *list, t_env **tenv)
 {
 	char	**env;
+	int		stdin;
+	int		stdout;
 
 	if (!list)
 		return ;
+	stdin = dup(0);
+	stdout = dup(1);
 	env = get_arr_env(tenv);
 	ft_pipe(list, env, tenv);
 	while (wait(NULL) != -1)
 		;
+	dup2(stdin, 0);
+	dup2(stdout, 1);
+	close(stdin);
+	close(stdout);
 }

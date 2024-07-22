@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/07 16:22:44 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:48:19 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/stat.h>
-
+# include <stdbool.h>
+# include <termios.h>
+// #define malloc(x) NULL
 /*--------------------------------------- colors------------------------------*/
 # define PINK "\x1b[95m"
 # define RED "\x1b[31m"
@@ -38,16 +40,6 @@
 # define UNDERLINE "\033[4m"
 # define PURPLE "\033[01;35m"
 # define RESET "\x1b[0m"
-/*------------------------------baground------------------------------------*/
-# define BG_BLACK    "\x1b[40m"
-# define BG_RED      "\x1b[41m"
-# define BG_GREEN    "\x1b[42m"
-# define BG_YELLOW   "\x1b[43m"
-# define BG_BLUE     "\x1b[44m"
-# define BG_MAGENTA  "\x1b[45m"
-# define BG_CYAN     "\x1b[46m"
-# define BG_WHITE    "\x1b[47m"
-
 /*----------------------------------Tokenization-----------------------------*/
 
 # define WORD 1
@@ -64,6 +56,7 @@
 # define DOLLAR_WHY 12
 # define CMD 13
 
+int	g_flag;
 typedef struct pipe
 {
 	int		end[2];
@@ -106,7 +99,7 @@ typedef struct end_list
 }					t_list;
 
 /*--------------------------lexer----------------------------*/
-void	signals(void);
+void	ft_sign(void);
 char	**ft_split(char *s, char c);
 void	ft_error_message(char *mess);
 int		ft_operations(char c);
@@ -186,5 +179,12 @@ char	*get_path(char	*argv, char	**env);
 char	**split_path(char **envp);
 char	**get_arr_env(t_env **tenv);
 void	ft_perror(char *str);
+int		check_red_files(t_list *list_com);
+void	sig_int_here(int sig_num);
+/*------------------exet_status------------------------------------*/
+char	*ft_itoa(int n);
+int		ft_status(int status, bool flag);
+void	exit_status(pid_t id);
+void	sig_here_doc(void);
 
 #endif
