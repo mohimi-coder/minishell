@@ -6,7 +6,7 @@
 /*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 10:50:48 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/06 20:59:30 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/23 22:46:17 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**ft_expand_var_sp(char *str, t_env *env)
 	{
 		if (!ft_strcmp(env->key, str + 1))
 			if (env->val)
-				return (free(str), ft_split(env->val + 1, ' '));
+				return (ft_split(env->val + 1, ' '));
 		env = env->next;
 	}
 	return (NULL);
@@ -72,7 +72,7 @@ void	ft_add_node(t_token *tmp, t_env *env)
 		tmp->content = NULL;
 		return ;
 	}
-	tmp->content = node[0];
+	(free(tmp->content), tmp->content = node[0]);
 	i = 1;
 	next_node = tmp->next;
 	while (node && node[i])
@@ -86,4 +86,16 @@ void	ft_add_node(t_token *tmp, t_env *env)
 		i++;
 	}
 	tmp->next = next_node;
+}
+
+int	check_red(t_token *tmp, t_env *env)
+{
+	char	**node;
+
+	node = ft_expand_var_sp(tmp->content, env);
+	if (!node)
+		return (1);
+	if (node[1])
+		return (ft_free_leak(node), 1);
+	return (ft_free_leak(node), 0);
 }

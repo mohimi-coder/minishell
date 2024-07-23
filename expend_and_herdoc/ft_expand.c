@@ -6,7 +6,7 @@
 /*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:23 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/06 20:44:11 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/23 22:48:59 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,14 @@ void	ft_expand(t_token **token, t_env *env)
 	while (tmp)
 	{
 		next = tmp->next;
-		if (tmp->type == VAR)
+		if ((tmp->type == OUT || tmp->type == IN || tmp->type == APPEND_OUT))
+		{
+			if (next->type == SPC && next->next->type == VAR)
+				next = next->next;
+			if (next->type == VAR && check_red(next, env))
+				next = next->next;
+		}
+		else if (tmp->type == VAR)
 		{
 			ft_add_node(tmp, env);
 			if (!tmp->content)

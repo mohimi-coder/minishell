@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/23 16:22:24 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/23 19:36:15 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ void	ft_expand(t_token **token, t_env *env);
 void	ft_expand_dollar(t_token *tok, char *str, t_env *env);
 char	**ft_expand_var_sp(char *str, t_env *env);
 void	ft_add_node(t_token *tmp, t_env *env);
+int		check_red(t_token *tmp, t_env *env);
 
 /*------------------------Builtins-----------------------------------*/
 int		ft_builtins(t_list *token, t_env **env);

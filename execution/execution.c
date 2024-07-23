@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:22:19 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/22 16:16:20 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/23 19:01:43 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ void	child1_func(int	*end, t_list *list, char *env[], t_env **tenv)
 		if (list->next && dup2(end[1], 1) < 0)
 			((close(end[1]), close(end[0])), ft_perror("dup Error"));
 		(close(end[1]), close(end[0]));
-		if (check_red_files(list) < 0)
+		if (check_red_files(list) == -1)
 			(ft_perror("error in opening files"), exit(ft_status(1, true)));
+		if (check_red_files(list) == -2)
+			(write(2, "ambiguous redirect\n", 20), exit(ft_status(1, true)));
 		if (ft_builtins(list, tenv))
 			exit(ft_status(1, true));
 		cmd = get_path(list->cmd[0], env);
@@ -51,11 +53,10 @@ void	child2_func(t_pipe	p, t_list *list, char *env[], t_env **tenv)
 		if (dup2(p.in, 0) < 0)
 			(close(p.in), ft_perror("dup3 Error"));
 		(close(p.in));
-		if (check_red_files(list) < 0)
-		{
-			ft_perror("error in opening files");
-			exit(ft_status(1, true));
-		}
+		if (check_red_files(list) == -1)
+			(ft_perror("error in opening files"), exit(ft_status(1, true)));
+		if (check_red_files(list) == -2)
+			(write(2, "ambiguous redirect\n", 20), exit(ft_status(1, true)));
 		if (ft_builtins(list, tenv))
 			exit(ft_status(1, true));
 		cmd = get_path(list->cmd[0], env);
@@ -79,11 +80,10 @@ void	ft_child(t_list *tmp, char *env[], t_pipe	p, t_env **tenv)
 		if (dup2(p.in, 0) < 0 || dup2(p.end2[1], 1) < 0)
 			ft_perror("dup Error");
 		(close(p.in), close(p.end2[1]));
-		if (check_red_files(tmp) < 0)
-		{
-			ft_perror("error in opening files");
-			exit(ft_status(1, true));
-		}
+		if (check_red_files(tmp) == -1)
+			(ft_perror("error in opening files"), exit(ft_status(1, true)));
+		if (check_red_files(tmp) == -2)
+			(write(2, "ambiguous redirect\n", 20), exit(ft_status(1, true)));
 		if (ft_builtins(tmp, tenv))
 			exit(ft_status(1, true));
 		cmd = get_path(tmp->cmd[0], env);
