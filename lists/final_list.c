@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 08:58:03 by mohimi            #+#    #+#             */
-/*   Updated: 2024/07/22 23:15:53 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/23 07:52:44 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,13 @@ void	ft_cmd(t_token *tmp, int count_cmd, t_list **final)
 			str[i] = ft_strdup(tmp->content);
 			i++;
 		}
-		else if (tmp->type == APPEND_OUT || tmp->type == IN || tmp->type == OUT || tmp->type == HER_DOC)
-		{
+		else
 			add_back(&redire, ft_lstnew(tmp->type, ft_strdup(tmp->content)));
-			printf("red : %s\n", redire->content);
-		}
-		if (tmp->type != CMD && (tmp->type == APPEND_OUT || tmp->type == IN || tmp->type == OUT || tmp->type == HER_DOC))
-		{
-			add_back(&redire, ft_lstnew(tmp->type, ft_strdup(tmp->content)));
-			printf("red : %s\n", redire->content);
-		}
+		// if (tmp->type != CMD && (tmp->type == APPEND_OUT || tmp->type == IN || tmp->type == OUT || tmp->type == HER_DOC))
+		// {
+		// 	add_back(&redire, ft_lstnew(tmp->type, ft_strdup(tmp->content)));
+		// 	printf("red : %s\n", redire->content);
+		// }
 		tmp = tmp->next;
 	}
 	str[i] = NULL;
@@ -56,7 +53,6 @@ t_list	*ft_finall(t_token *head)
 	t_token	*tmp_tmp;
 
 	(1) && (final = NULL, tmp = head);
-		printf("ikhaaan : %d\n", tmp->type);
 	while (tmp)
 	{
 		(1) && (tmp_tmp = tmp, count_cmd = 0);

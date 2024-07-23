@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:04:48 by mohimi            #+#    #+#             */
-/*   Updated: 2024/07/22 19:54:14 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/23 07:57:49 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*read_and_expand(char *delimiter, int flag, t_env *env)
 
 	(sig_here_doc(), rl_catch_signals = 1);
 	(1) && (sec_in = dup(0), buff = NULL, str = readline("heredoc 📝➥ "));
-	while (g_flag != -1 && str && ft_strcmp(str, delimiter))
+	while (str && ft_strcmp(str, delimiter))
 	{
 		if (flag == 0)
 		{
@@ -108,7 +108,7 @@ t_token	*ft_herdoc(t_token *token, t_env *env)
 		(ft_error_message(RED BOLD "➥  syntax error❗" RESET), ft_status(258, true));
 		return (NULL);
 	}
-	while (tmp)
+	while (g_flag != -1 && tmp)
 	{
 		if (tmp->type != HER_DOC)
 		{

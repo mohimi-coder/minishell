@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 07:46:32 by mohimi            #+#    #+#             */
-/*   Updated: 2024/07/22 22:57:27 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/23 07:50:54 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	ft_open_files(t_token *list, int mode)
 	int	fd;
 
 	fd = 0;
-	printf("---> : %s\n", list->content);
 	if (mode == 0)
 		fd = open(list->content, O_RDONLY);
 	else if (mode == 1)
