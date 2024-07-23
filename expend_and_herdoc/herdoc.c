@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:04:48 by mohimi            #+#    #+#             */
-/*   Updated: 2024/07/23 07:57:49 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/23 15:56:43 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*read_and_expand(char *delimiter, int flag, t_env *env)
 	int		sec_in;
 
 	(sig_here_doc(), rl_catch_signals = 1);
-	(1) && (sec_in = dup(0), buff = NULL, str = readline("heredoc 📝➥ "));
+	(1) && (sec_in = dup(0), buff = NULL, str = readline("heredoc📝➥ "));
 	while (str && ft_strcmp(str, delimiter))
 	{
 		if (flag == 0)
@@ -34,7 +34,7 @@ char	*read_and_expand(char *delimiter, int flag, t_env *env)
 			tmp = join_her(buff, str);
 			(free(buff), buff = tmp);
 		}
-		(1) && (free(str), str = readline("heredoc 📝➥"));
+		(1) && (free(str), str = readline("heredoc📝➥ "));
 		add_newline(str, delimiter, &buff);
 	}
 	(ft_sign(), dup2(sec_in, 0), close(sec_in));
@@ -105,7 +105,7 @@ t_token	*ft_herdoc(t_token *token, t_env *env)
 	(1) && (new = NULL, tmp = token);
 	if (pipe_errors(token) || redirec_errors(token))
 	{
-		(ft_error_message(RED BOLD "➥  syntax error❗" RESET), ft_status(258, true));
+		(ft_error_message("➥  syntax error❗"), ft_status(258, true));
 		return (NULL);
 	}
 	while (g_flag != -1 && tmp)

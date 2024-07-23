@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/22 19:48:19 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/23 16:22:24 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,12 @@ typedef struct end_list
 	t_token				*red;
 	struct end_list		*next;	
 }					t_list;
+
+typedef struct s_fd
+{
+	int		fd1;
+	int		fd2;
+}	t_fd;
 
 /*--------------------------lexer----------------------------*/
 void	ft_sign(void);

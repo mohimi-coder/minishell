@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 18:22:08 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/22 20:57:57 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/23 12:00:37 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ char	*get_path(char	*argv, char	**env)
 	int			i;
 	struct stat	file;
 
-	if (!argv[0])
+	if (argv && !argv[0])
 		(print_no_cmd("", ": command not found\n"), exit(127));
 	if (stat(argv, &file) == 0 && S_ISDIR(file.st_mode))
 		(write(2, ":is a directory\n", 17), exit(126));
-	if (argv[0] == '/')
+	if (argv && argv[0] == '/')
 		return (ft_strdup(argv));
-	else if (argv[0] == '.')
+	else if (argv && argv[0] == '.')
 		return (ft_strdup(argv + 2));
 	1 && (path = split_path(env), i = 0);
 	command = ft_strjoin(ft_strdup("/"), ft_strdup(argv));

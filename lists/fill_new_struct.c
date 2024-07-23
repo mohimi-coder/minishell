@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_new_struct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:32:27 by mohimi            #+#    #+#             */
-/*   Updated: 2024/07/03 11:56:37 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/23 13:17:57 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,28 @@ int	is_cmd(int type)
 	return (0);
 }
 
-void	skip_red(t_token **lst, t_token *new)
+void	skip_red(t_token **lst, t_token **new)
 {
 	if ((*lst)->type == PIPE)
 	{
-		add_back(&new, ft_lstnew((*lst)->type, ft_strdup((*lst)->content)));
+		add_back(new, ft_lstnew((*lst)->type, ft_strdup((*lst)->content)));
 		*lst = (*lst)->next;
 	}
 	else
 	{
 		if ((*lst)->next->type == SPC)
 		{
-			add_back(&new, ft_lstnew((*lst)->type,
-					ft_strdup((*lst)->next->next->content)));
+			if ((*lst)->next->next)
+				add_back(new, ft_lstnew((*lst)->type,
+						ft_strdup((*lst)->next->next->content)));
 			(*lst) = (*lst)->next;
 		}
 		else
-			add_back(&new, ft_lstnew((*lst)->type,
+		{
+			add_back(new, ft_lstnew((*lst)->type,
 					ft_strdup((*lst)->next->content)));
-		*lst = (*lst)->next->next;
+		}
+		((*lst)->next) && (*lst = (*lst)->next->next);
 	}
 }
 
@@ -91,7 +94,7 @@ t_token	*new_list(t_token *lst)
 		else if (lst->type == SPC)
 			lst = lst->next;
 		else
-			skip_red(&lst, new);
+			skip_red(&lst, &new);
 	}
 	return (new);
 }

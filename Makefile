@@ -1,6 +1,6 @@
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 FILE =  ./parcing/parser_utils.c ./parcing/parser_utils2.c \
 		./parcing/parser.c ./parcing/exit_status.c \

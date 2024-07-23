@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 07:46:32 by mohimi            #+#    #+#             */
-/*   Updated: 2024/07/23 07:50:54 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/23 14:44:00 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	ft_open_files(t_token *list, int mode)
 	if (list->type < 0)
 		return (-1);
 	if (list->type == HER_DOC || list->type == IN)
-		dup2(fd, 0);
+		(dup2(fd, 0), close(fd));
 	else
-		dup2(fd, 1);
+		(dup2(fd, 1), close(fd));
 	return (mode);
 }
 
@@ -39,10 +39,8 @@ int	check_red_files(t_list *list_com)
 	tmp = NULL;
 	if (list_com)
 		tmp = list_com->red;
-	// printf("tmp : %s\n", list_com->red->content);
 	while (tmp)
 	{
-		// printf(" type : %d\n", tmp->type);
 		if (tmp->type == HER_DOC || tmp->type == IN)
 		{
 			if (ft_open_files(tmp, 0) < 0)

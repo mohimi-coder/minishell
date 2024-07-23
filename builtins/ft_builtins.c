@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:57:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/22 19:20:55 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/23 11:52:56 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,19 @@ int	ft_builtins(t_list *token, t_env **env)
 	int	i;
 
 	i = 0;
-	if (!ft_strcmp(ft_tolower(token->cmd[0]), "env") && !token->cmd[1])
+	if (token->cmd && token->cmd[0] && !ft_strcmp(ft_tolower(token->cmd[0]), "env") && !token->cmd[1])
 		(ft_env(*env), i = 1);
-	if (!ft_strcmp(token->cmd[0], "export"))
+	if (token->cmd && token->cmd[0] && !ft_strcmp(token->cmd[0], "export"))
 		(ft_export_var(*env, token->cmd), i = 1);
-	if (!ft_strcmp(token->cmd[0], "unset"))
+	if (token->cmd && token->cmd[0] && !ft_strcmp(token->cmd[0], "unset"))
 		(ft_unset(env, token->cmd), i = 1);
-	if (!ft_strcmp(ft_tolower(token->cmd[0]), "pwd"))
+	if (token->cmd && token->cmd[0] && !ft_strcmp(ft_tolower(token->cmd[0]), "pwd"))
 		(ft_pwd(), i = 1);
-	if (!ft_strcmp(token->cmd[0], "cd"))
+	if (token->cmd && token->cmd[0] && !ft_strcmp(token->cmd[0], "cd"))
 		(ft_cd(token->cmd, env), i = 1);
-	if (!ft_strcmp(token->cmd[0], "exit"))
+	if (token->cmd && token->cmd[0] && !ft_strcmp(token->cmd[0], "exit"))
 		(ft_exit(token->cmd), i = 1);
-	if (!ft_strcmp(ft_tolower(token->cmd[0]), "echo"))
+	if (token->cmd && token->cmd[0] && !ft_strcmp(ft_tolower(token->cmd[0]), "echo"))
 		(ft_echo(token), i = 1);
 	return (i);
 }
