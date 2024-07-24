@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   final_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 08:58:03 by mohimi            #+#    #+#             */
-/*   Updated: 2024/07/24 13:38:55 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/24 22:14:28 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_cmd(t_token *tmp, int count_cmd, t_list **final)
 	str = malloc(sizeof(char *) * (count_cmd + 1));
 	if (!str)
 	{
-		printf("error in malloc\n");
+		write(2, "error in malloc\n", 17);
 		return ;
 	}
 	while (tmp && tmp->type != PIPE)

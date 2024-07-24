@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 07:46:32 by mohimi            #+#    #+#             */
-/*   Updated: 2024/07/24 12:18:53 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/24 23:04:09 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	ft_open_files(t_token *list, int mode)
 int	check_red_files(t_list *list_com)
 {
 	t_token	*tmp;
+	int		fd;
 
 	tmp = NULL;
 	if (list_com)
@@ -44,11 +45,13 @@ int	check_red_files(t_list *list_com)
 	while (tmp)
 	{
 		if (tmp->type == HER_DOC || tmp->type == IN)
-			return (ft_open_files(tmp, 0));
+			fd = ft_open_files(tmp, 0);
 		else if (tmp->type == OUT)
-			return (ft_open_files(tmp, 1));
+			fd = ft_open_files(tmp, 1);
 		else if (tmp->type == APPEND_OUT)
-			return (ft_open_files(tmp, 2));
+			fd = ft_open_files(tmp, 2);
+		if (fd < 0)
+			return (fd);
 		tmp = tmp->next;
 	}
 	return (0);

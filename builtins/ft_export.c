@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 19:09:19 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/21 13:30:54 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/24 22:13:36 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ int	add_export(char **s, char *str, t_env *new, t_env *env)
 			|| (s[0][0] >= '0' && s[0][0] <= '9'))
 		{
 			if (!ft_strchr(str, '='))
-				return (printf("%s ➥ %s: not an identifier❗%s\n",
-						RED BOLD, s[0], RESET), st);
-			return (printf("%s ➥ %s%s: not an identifier❗%s\n",
-					RED BOLD, s[0], ft_strchr(str, '='), RESET), st);
+				return ((print_no_cmd(s[0], ": not an identifier\n"), st));
+			return (print_no_cmd(s[0], ": not an identifier\n"),
+				write(2, ft_strchr(str, '='),
+					ft_strlen(ft_strchr(str, '='))), st);
 		}
 		i++;
 	}
