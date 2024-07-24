@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 22:39:53 by mohimi            #+#    #+#             */
-/*   Updated: 2024/07/24 20:47:11 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/24 21:06:22 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int	n_check(char c, char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (c != str[i])
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 void	ft_echo(t_list *list)
 {
@@ -34,8 +20,8 @@ void	ft_echo(t_list *list)
 	(1) && (i = 1, count = 0);
 	if (!list)
 		return ;
-	while (list && list->cmd[i] && (list->cmd[i][0] == '-'
-		&& !n_check('n', list->cmd[i] + 1)))
+	while ((list && list->cmd[i]) && (list->cmd[i][0] == '-'
+		&& ft_strchr(list->cmd[i] + 1, 'n')))
 		1 && (count++, i++);
 	while (list && list->cmd && list->cmd[i])
 	{
