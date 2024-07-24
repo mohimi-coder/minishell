@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 22:39:53 by mohimi            #+#    #+#             */
-/*   Updated: 2024/07/21 13:27:18 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/24 12:25:03 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_echo(t_list *list)
 		return ;
 	while (list && list->cmd[i] && (list->cmd[i][0] == '-'
 		&& !n_check('n', list->cmd[i] + 1)))
-		((count++), (i++));
+		1 && (count++, i++);
 	while (list && list->cmd && list->cmd[i])
 	{
 		if (list->cmd[i])

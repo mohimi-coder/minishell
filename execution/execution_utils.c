@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 07:46:32 by mohimi            #+#    #+#             */
-/*   Updated: 2024/07/23 18:04:19 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/24 12:18:53 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,18 @@ int	check_red_files(t_list *list_com)
 	while (tmp)
 	{
 		if (tmp->type == HER_DOC || tmp->type == IN)
-		{
-			if (ft_open_files(tmp, 0) == -1)
-				return (-1);
-			if (ft_open_files(tmp, 0) == -2)
-				return (-2);
-		}
+			return (ft_open_files(tmp, 0));
 		else if (tmp->type == OUT)
-		{
-			if (ft_open_files(tmp, 1) == -1)
-				return (-1);
-			if (ft_open_files(tmp, 1) == -2)
-				return (-2);
-		}
+			return (ft_open_files(tmp, 1));
 		else if (tmp->type == APPEND_OUT)
-		{
-			if (ft_open_files(tmp, 2) == -1)
-				return (-1);
-			if (ft_open_files(tmp, 2) == -2)
-				return (-2);
-		}
+			return (ft_open_files(tmp, 2));
 		tmp = tmp->next;
 	}
 	return (0);
+}
+
+void	ft_perror(char *str)
+{
+	perror(str);
+	exit(1);
 }

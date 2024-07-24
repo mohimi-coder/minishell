@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_last_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 08:59:39 by mohimi            #+#    #+#             */
-/*   Updated: 2024/07/04 11:35:23 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/24 16:09:33 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	ft_lstclear_final(t_list **lst)
 		tmp = current;
 		current = current->next;
 		ft_free_leak(tmp->cmd);
+		ft_lstclear(&(tmp->red));
 		free(tmp);
 	}
 	*lst = NULL;

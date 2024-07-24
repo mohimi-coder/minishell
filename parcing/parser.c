@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:25:07 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/21 13:18:29 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/24 12:43:42 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,16 @@ void	ft_var(char *av, t_token **token, int *i, int *start)
 
 void	handle_dollar(char *av, int *i, t_token **token)
 {
-	int	start;
+	int		start;
+	char	*nbr;
 
-	start = *i;
+	1 && (start = *i, nbr = ft_itoa(ft_status(0, false)));
 	if (av[*i + 1] && (av[*i + 1] == '$' || av[*i + 1] == '?'))
 	{
 		if (av[*i + 1] == '$')
 			add_back(token, ft_lstnew(DOUBLE_DOLLAR, ft_strdup("$$")));
 		else
-			add_back(token, ft_lstnew(DOLLAR_WHY, ft_itoa(ft_status(0, false))));
+			add_back(token, ft_lstnew(DOLLAR_WHY, nbr));
 		(*i) += 2;
 	}
 	else if (av[*i + 1] && (f_alnum(av[*i + 1]) || av[*i + 1] == '_'))

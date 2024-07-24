@@ -1,20 +1,37 @@
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 
-FILE =  ./parcing/parser_utils.c ./parcing/parser_utils2.c \
-		./parcing/parser.c ./parcing/exit_status.c \
-		./builtins/ft_builtins.c ./builtins/ft_export.c \
-		./builtins/ft_cd.c ./builtins/ft_exit.c \
-		./builtins/ft_echo.c ./builtins/ft_env.c ./builtins/ft_unset.c ./builtins/export_helper.c\
-		./lists/fill_new_struct.c ./lists/env_list.c \
-		./lists/final_list.c ./lists/utils_last_list.c ./lists/lists.c \
-		./expend_and_herdoc/ft_expand.c  ./expend_and_herdoc/expand_helper.c\
-		./expend_and_herdoc/herdoc.c ./expend_and_herdoc/utils_her.c ./expend_and_herdoc/here_helper.c\
-		minishell.c libft_helper.c \
-		syntax_errors.c ft_split.c signals.c \
-		./execution/execution.c ./execution/execution_helper.c \
-		./execution/execution_utils.c
+FILE =				./builtins/export_helper.c \
+					./builtins/ft_builtins.c \
+					./builtins/ft_cd.c \
+					./builtins/ft_echo.c \
+					./builtins/ft_env.c \
+					./builtins/ft_exit.c \
+					./builtins/ft_export.c \
+					./builtins/ft_unset.c \
+					./execution/execution.c \
+					./execution/execution_helper.c \
+					./execution/execution_utils.c \
+					./expend_and_herdoc/expand_helper.c \
+					./expend_and_herdoc/ft_expand.c \
+					./expend_and_herdoc/herdoc.c \
+					./expend_and_herdoc/here_helper.c \
+					./expend_and_herdoc/utils_her.c \
+					./ft_split.c \
+					./libft_helper.c \
+					./lists/env_list.c \
+					./lists/fill_new_struct.c \
+					./lists/final_list.c \
+					./lists/lists.c \
+					./lists/utils_last_list.c \
+					./minishell.c \
+					./parcing/exit_status.c \
+					./parcing/parser.c \
+					./parcing/parser_utils.c \
+					./parcing/parser_utils2.c \
+					./signals.c \
+					./syntax_errors.c
 
 OBJECT_FILE = $(FILE:.c=.o)
 

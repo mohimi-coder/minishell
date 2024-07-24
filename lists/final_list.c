@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   final_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 08:58:03 by mohimi            #+#    #+#             */
-/*   Updated: 2024/07/23 22:51:59 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/24 13:38:55 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,6 @@ void	ft_cmd(t_token *tmp, int count_cmd, t_list **final)
 		}
 		else
 			add_back(&redire, ft_lstnew(tmp->type, ft_strdup(tmp->content)));
-		// if (tmp->type != CMD && (tmp->type == APPEND_OUT || tmp->type == IN || tmp->type == OUT || tmp->type == HER_DOC))
-		// {
-		// 	add_back(&redire, ft_lstnew(tmp->type, ft_strdup(tmp->content)));
-		// 	printf("red : %s\n", redire->content);
-		// }
 		tmp = tmp->next;
 	}
 	str[i] = NULL;

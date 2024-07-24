@@ -6,16 +6,16 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 18:22:08 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/23 12:00:37 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/24 12:18:18 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void    print_no_cmd(char *cmd, char *msg)
+void	print_no_cmd(char *cmd, char *msg)
 {
-    write(2, cmd, ft_strlen(cmd));
-    write(2, msg, ft_strlen(msg));
+	write(2, cmd, ft_strlen(cmd));
+	write(2, msg, ft_strlen(msg));
 }
 
 void	**ft_free2(char **arr)
@@ -43,16 +43,16 @@ char	*get_path(char	*argv, char	**env)
 	struct stat	file;
 
 	if (argv && !argv[0])
-		(print_no_cmd("", ": command not found\n"), exit(127));
+		(print_no_cmd("", ": command not found\n"), ft_status(127, true));
 	if (stat(argv, &file) == 0 && S_ISDIR(file.st_mode))
-		(write(2, ":is a directory\n", 17), exit(126));
+		(write(2, ":is a directory\n", 17), ft_status(126, true));
 	if (argv && argv[0] == '/')
 		return (ft_strdup(argv));
 	else if (argv && argv[0] == '.')
 		return (ft_strdup(argv + 2));
 	1 && (path = split_path(env), i = 0);
 	command = ft_strjoin(ft_strdup("/"), ft_strdup(argv));
-	while (path[i])
+	while (path && path[i])
 	{
 		res = ft_strjoin(ft_strdup(path[i++]), ft_strdup(command));
 		if (access(res, F_OK) == 0)
@@ -108,10 +108,4 @@ char	**get_arr_env(t_env **tenv)
 	}
 	env[i] = NULL;
 	return (env);
-}
-
-void	ft_perror(char *str)
-{
-	perror(str);
-	exit(1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:22:19 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/23 19:01:43 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/24 15:56:20 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	child1_func(int	*end, t_list *list, char *env[], t_env **tenv)
 			exit(ft_status(1, true));
 		cmd = get_path(list->cmd[0], env);
 		execve(cmd, list->cmd, env);
+		exit(1);
 	}
 	if (!list->next)
 		exit_status(id);
@@ -62,6 +63,7 @@ void	child2_func(t_pipe	p, t_list *list, char *env[], t_env **tenv)
 		cmd = get_path(list->cmd[0], env);
 		execve(cmd, list->cmd, env);
 		ft_perror(list->cmd[0]);
+		exit(1);
 	}
 	exit_status(id);
 }
@@ -89,6 +91,7 @@ void	ft_child(t_list *tmp, char *env[], t_pipe	p, t_env **tenv)
 		cmd = get_path(tmp->cmd[0], env);
 		execve(cmd, tmp->cmd, env);
 		ft_perror(tmp->cmd[0]);
+		exit(1);
 	}
 }
 
@@ -117,19 +120,12 @@ void	ft_pipe(t_list *list, char *env[], t_env **tenv)
 void	execution(t_list *list, t_env **tenv)
 {
 	char	**env;
-	int		stdin;
-	int		stdout;
 
 	if (!list)
 		return ;
-	stdin = dup(0);
-	stdout = dup(1);
 	env = get_arr_env(tenv);
 	ft_pipe(list, env, tenv);
 	while (wait(NULL) != -1)
 		;
-	dup2(stdin, 0);
-	dup2(stdout, 1);
-	close(stdin);
-	close(stdout);
+	ft_free_leak(env);
 }
