@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_helper.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 18:22:08 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/24 12:18:18 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/24 19:34:03 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*get_path(char	*argv, char	**env)
 	if (argv && !argv[0])
 		(print_no_cmd("", ": command not found\n"), ft_status(127, true));
 	if (stat(argv, &file) == 0 && S_ISDIR(file.st_mode))
-		(write(2, ":is a directory\n", 17), ft_status(126, true));
+		(print_no_cmd(argv, ": is a directory\n"), ft_status(126, true));
 	if (argv && argv[0] == '/')
 		return (ft_strdup(argv));
 	else if (argv && argv[0] == '.')

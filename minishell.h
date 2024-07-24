@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/24 13:46:58 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/24 19:35:45 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ char	*ft_strjoin(char *s1, char *s2);
 int		ft_strcmp(char const *s1, char const *s2);
 char	*ft_strchr(char *s, char c);
 char	*ft_tolower(char *c);
+void	print_no_cmd(char *cmd, char *msg);
 /*------------------------linked list-------------------------------*/
 t_token	*ft_lstnew(int type, char *content);
 void	add_back(t_token **lst, t_token *new);
