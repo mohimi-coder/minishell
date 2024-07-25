@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:22:19 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/25 15:21:17 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/25 23:03:20 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ pid_t	child1_func(int	*end, t_list *list, char *env[], t_env **tenv)
 			exit(ft_status(1, true));
 		cmd = get_path(list->cmd[0], env);
 		execve(cmd, list->cmd, env);
-		exit(1);
+		(write(2, cmd, ft_strlen(cmd)), perror("execve"));
+		exit(127);
 	}
 	if (!list->next)
 		return (id);
