@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 14:43:38 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/25 23:22:09 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/26 00:24:51 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ int	ft_atoi(char *str)
 		i++;
 	}
 	if (!str[i])
-		(write(2, "exit\n", 5), write(2, "num arg reqrd❗", 17), exit(255));
+		(write(2, "exit\n", 5), write(2, "num arg reqrd❗\n", 18), exit(255));
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = res * 10 + str[i] - 48;
 		i++;
 	}
 	if (str[i])
-		(write(2, "exit\n", 5), write(2, "num arg reqrd❗", 17), exit(255));
+		(write(2, "exit\n", 5), write(2, "num arg reqrd❗\n", 18), exit(255));
 	return (res * sign);
 }
 

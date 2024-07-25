@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 18:22:08 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/25 23:06:51 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/26 00:25:52 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,18 @@ void	**ft_free2(char **arr)
 	return (NULL);
 }
 
+static char	*check_path(char **path, int *i, char *res, char *command)
+{
+	while (path && path[*i])
+	{
+		res = ft_strjoin(ft_strdup(path[(*i)++]), ft_strdup(command));
+		if (access(res, X_OK) == 0)
+			return (free(command), ft_free2(path), res);
+		free(res);
+	}
+	return (NULL);
+}
+
 char	*get_path(char	*argv, char	**env)
 {
 	char		**path;
@@ -42,6 +54,9 @@ char	*get_path(char	*argv, char	**env)
 	int			i;
 	struct stat	file;
 
+	res = NULL;
+	if (!argv)
+		exit(0);
 	if (argv && !argv[0])
 		(print_no_cmd("", ": command not found\n"), exit(127));
 	if (stat(argv, &file) == 0 && S_ISDIR(file.st_mode))
@@ -52,13 +67,9 @@ char	*get_path(char	*argv, char	**env)
 		return (ft_strdup(argv + 2));
 	1 && (path = split_path(env), i = 0);
 	command = ft_strjoin(ft_strdup("/"), ft_strdup(argv));
-	while (path && path[i])
-	{
-		res = ft_strjoin(ft_strdup(path[i++]), ft_strdup(command));
-		if (access(res, F_OK) == 0)
-			return (free(command), ft_free2(path), res);
-		free(res);
-	}
+	res = check_path(path, &i, res, command);
+	if (res)
+		return (res);
 	(print_no_cmd(argv, ": command not found\n"), exit(127));
 }
 
@@ -79,33 +90,4 @@ char	**split_path(char **envp)
 		i++;
 	}
 	return (path);
-}
-
-char	**get_arr_env(t_env **tenv)
-{
-	char	**env;
-	int		count;
-	t_env	*tmp;
-	int		i;
-
-	tmp = *tenv;
-	count = 0;
-	i = 0;
-	while (tmp)
-	{
-		count++;
-		tmp = tmp->next;
-	}
-	env = malloc(sizeof(char *) * (count + 1));
-	if (!env)
-		return (NULL);
-	tmp = *tenv;
-	while (tmp)
-	{
-		env[i] = ft_strjoin(ft_strdup(tmp->key), ft_strdup(tmp->val));
-		i++;
-		tmp = tmp->next;
-	}
-	env[i] = NULL;
-	return (env);
 }
