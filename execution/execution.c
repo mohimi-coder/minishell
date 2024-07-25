@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:22:19 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/24 15:56:20 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/25 15:21:17 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_flag = 0;
 
-void	child1_func(int	*end, t_list *list, char *env[], t_env **tenv)
+pid_t	child1_func(int	*end, t_list *list, char *env[], t_env **tenv)
 {
 	char	*cmd;
 	int		id;
@@ -38,13 +38,14 @@ void	child1_func(int	*end, t_list *list, char *env[], t_env **tenv)
 		exit(1);
 	}
 	if (!list->next)
-		exit_status(id);
+		return (id);
+	return (0);
 }
 
-void	child2_func(t_pipe	p, t_list *list, char *env[], t_env **tenv)
+pid_t	child2_func(t_pipe	p, t_list *list, char *env[], t_env **tenv)
 {
-	char	*cmd;
-	int		id;
+	char		*cmd;
+	pid_t		id;
 
 	id = fork();
 	if (id < 0)
@@ -65,7 +66,7 @@ void	child2_func(t_pipe	p, t_list *list, char *env[], t_env **tenv)
 		ft_perror(list->cmd[0]);
 		exit(1);
 	}
-	exit_status(id);
+	return (id);
 }
 
 void	ft_child(t_list *tmp, char *env[], t_pipe	p, t_env **tenv)
@@ -95,12 +96,14 @@ void	ft_child(t_list *tmp, char *env[], t_pipe	p, t_env **tenv)
 	}
 }
 
-void	ft_pipe(t_list *list, char *env[], t_env **tenv)
+pid_t	ft_pipe(t_list *list, char *env[], t_env **tenv)
 {
 	t_list	*tmp;
 	t_pipe	p;
+	pid_t	st;
 
 	tmp = list;
+	st = 0;
 	if (pipe(p.end) < 0)
 		ft_perror("error in pipe");
 	child1_func(p.end, list, env, tenv);
@@ -113,19 +116,25 @@ void	ft_pipe(t_list *list, char *env[], t_env **tenv)
 		(close(p.end2[1]), tmp = tmp->next);
 	}
 	if (tmp)
-		(child2_func(p, tmp, env, tenv));
+		st = child2_func(p, tmp, env, tenv);
 	close(p.in);
+	return (st);
 }
 
 void	execution(t_list *list, t_env **tenv)
 {
 	char	**env;
+	pid_t	id;
+	int		status;
 
 	if (!list)
 		return ;
 	env = get_arr_env(tenv);
-	ft_pipe(list, env, tenv);
+	id = ft_pipe(list, env, tenv);
+	waitpid(id, &status, 0);
 	while (wait(NULL) != -1)
 		;
 	ft_free_leak(env);
+	status = status >> 8;
+	ft_status(status, true);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_new_struct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:32:27 by mohimi            #+#    #+#             */
-/*   Updated: 2024/07/24 15:59:34 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/25 20:58:00 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ t_token	*new_list(t_token *lst)
 			join = NULL;
 			while (lst && is_cmd(lst->type))
 			{
-				join = ft_strjoin2(join, lst->content);
+				join = ft_strjoin(join, ft_strdup(lst->content));
 				lst = lst->next;
 			}
-			add_back(&new, ft_lstnew(CMD, ft_strdup(join)));
+			add_back(&new, ft_lstnew(CMD, join));
 		}
 		else if (lst->type == SPC)
 			lst = lst->next;

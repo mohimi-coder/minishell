@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 13:04:28 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/22 18:52:32 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/25 22:19:53 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_env	*ft_check_var(char *str, t_env *env)
 void	initialize_default_env(t_env **envr)
 {
 	add_back_env(envr, lstnew_env(ft_strdup("PWD"), \
-		ft_strjoin(ft_strdup("="), ft_strdup(getcwd(NULL, 0)))));
+		ft_strjoin(ft_strdup("="), getcwd(NULL, 0))));
 	add_back_env(envr, lstnew_env(ft_strdup("SHLVL"), ft_strdup("=2")));
 	add_back_env(envr, lstnew_env(ft_strdup("OLDPWD"), NULL));
 	add_back_env(envr, lstnew_env(ft_strdup("PATH"), \

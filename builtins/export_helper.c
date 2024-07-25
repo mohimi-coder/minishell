@@ -6,7 +6,7 @@
 /*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:01:57 by mohimi            #+#    #+#             */
-/*   Updated: 2024/07/24 22:22:12 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/25 22:10:34 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ft_update(char *str, t_env *env, t_env *new, char **s)
 		free(new->val);
 		new->val = ft_strdup(ft_strchr(str, '='));
 	}
-	ft_free_leak(s);
 }
 
 int	check_cmd(char *cmd)

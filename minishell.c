@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:44:50 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/24 15:46:42 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/25 22:25:18 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_puspaces(char *av, t_env **env, t_fd *fds)
 	1 && (fds->fd1 = dup(STDIN_FILENO), fds->fd2 = dup(STDOUT_FILENO));
 	check_red_files(final_list);
 	if (final_list && !final_list->next && ft_builtins(final_list, env))
-		final_list = final_list->next;
+		(ft_lstclear_final(&final_list), final_list = NULL);
 	g_flag = 1;
 	execution(final_list, env);
 	g_flag = 0;

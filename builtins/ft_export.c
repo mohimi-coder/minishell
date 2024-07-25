@@ -6,7 +6,7 @@
 /*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 19:09:19 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/24 22:13:36 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/25 22:12:48 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int	add_export(char **s, char *str, t_env *new, t_env *env)
 		if (s[0][i] == '+' && !s[0][i + 1] && ft_strchr(str, '='))
 		{
 			ft_concatenate(s, str, new, env);
-			ft_free_leak(s);
 			return (1);
 		}
 		if ((!(f_alnum(s[0][i]) || s[0][i] == '_'))
@@ -78,9 +77,8 @@ int	add_export(char **s, char *str, t_env *new, t_env *env)
 		{
 			if (!ft_strchr(str, '='))
 				return ((print_no_cmd(s[0], ": not an identifier\n"), st));
-			return (print_no_cmd(s[0], ": not an identifier\n"),
-				write(2, ft_strchr(str, '='),
-					ft_strlen(ft_strchr(str, '='))), st);
+			return (print_no_cmd(s[0], ft_strchr(str, '=')),
+				write(2, ": not an identifier\n", 21), st);
 		}
 		i++;
 	}
@@ -96,8 +94,8 @@ void	ft_export_var(t_env *env, char **cmd)
 
 	if (!cmd[1])
 		return (ft_export(env));
-	i = 1;
-	while (cmd[i])
+	i = 0;
+	while (cmd[++i])
 	{
 		(1) && (new = NULL, s = ft_split(cmd[i], '='));
 		if (!s)
@@ -110,9 +108,9 @@ void	ft_export_var(t_env *env, char **cmd)
 			{
 				new = lstnew_env(ft_strdup(s[0]),
 						ft_strdup(ft_strchr(cmd[i], '=')));
-				(add_back_env(&env, new), ft_free_leak(s));
+				(add_back_env(&env, new));
 			}
 		}
-		i++;
+		ft_free_leak(s);
 	}
 }

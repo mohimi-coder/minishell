@@ -6,7 +6,7 @@
 /*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 18:22:08 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/24 19:34:03 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/25 15:07:22 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ char	*get_path(char	*argv, char	**env)
 	struct stat	file;
 
 	if (argv && !argv[0])
-		(print_no_cmd("", ": command not found\n"), ft_status(127, true));
+		(print_no_cmd("", ": command not found\n"), exit(127));
 	if (stat(argv, &file) == 0 && S_ISDIR(file.st_mode))
-		(print_no_cmd(argv, ": is a directory\n"), ft_status(126, true));
+		(print_no_cmd(argv, ": is a directory\n"), exit(126));
 	if (argv && argv[0] == '/')
 		return (ft_strdup(argv));
 	else if (argv && argv[0] == '.')

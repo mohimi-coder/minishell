@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_her.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:02:29 by mohimi            #+#    #+#             */
-/*   Updated: 2024/07/24 12:21:10 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/25 22:33:09 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,20 @@ static void	handle_variable(t_var *v, char *s, t_env *env)
 char	*epnd__her(char *s, t_env *env)
 {
 	t_var	v;
+	char	*nbr;
 
 	v.i = 0;
-	v.join = NULL;
-	v.tmp = NULL;
+	1 && (v.join = NULL, v.tmp = NULL);
+	nbr = ft_itoa(ft_status(0, false));
 	while (s[v.i])
 	{
 		if (s[v.i] == '$' && (f_alnum(s[v.i + 1]) || s[v.i + 1] == '_'))
 			handle_variable(&v, s, env);
+		else if (s[v.i] == '$')
+		{
+			1 && (v.tmp = ft_strdup(nbr), v.join = ft_strjoin(v.join, v.tmp));
+			v.i += 2;
+		}
 		else
 		{
 			v.tmp = ft_substr(s, v.i, 1);
@@ -117,5 +123,5 @@ char	*epnd__her(char *s, t_env *env)
 	}
 	if (!v.join)
 		v.join = ft_strdup("");
-	return (v.join);
+	return (free(nbr), v.join);
 }

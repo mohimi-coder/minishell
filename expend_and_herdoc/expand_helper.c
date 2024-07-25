@@ -6,7 +6,7 @@
 /*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 10:50:48 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/24 19:12:25 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/25 22:30:22 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,23 +69,23 @@ void	ft_add_node(t_token *tmp, t_env *env)
 	node = ft_expand_var_sp(tmp->content, env);
 	if (!node)
 	{
-		tmp->content = NULL;
+		(free(tmp->content), tmp->content = NULL);
 		return ;
 	}
-	(free(tmp->content), tmp->content = node[0]);
-	i = 1;
+	(free(tmp->content), tmp->content = ft_strdup(node[0]), i = 1);
 	next_node = tmp->next;
 	while (node && node[i])
 	{
 		new = ft_lstnew(SPC, ft_strdup(" "));
 		tmp->next = new;
 		tmp = new;
-		new = ft_lstnew(VAR, node[i]);
+		new = ft_lstnew(VAR, ft_strdup(node[i]));
 		tmp->next = new;
 		tmp = new;
 		i++;
 	}
 	tmp->next = next_node;
+	ft_free_leak(node);
 }
 
 int	check_red(t_token *tmp, t_env *env)

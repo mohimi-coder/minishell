@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:23 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/24 12:20:08 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/25 21:34:57 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_expand_var(char *str, t_env *env)
 				return (free(str), ft_strdup(env->val + 1));
 		env = env->next;
 	}
-	return (NULL);
+	return (free(str), NULL);
 }
 
 void	handle_variable(t_var *v, char *s, t_env *env)
@@ -42,13 +42,22 @@ void	handle_variable(t_var *v, char *s, t_env *env)
 
 void	handle_dollar_sign(t_var *v, char *s)
 {
+	char	*nbr;
+
+	nbr = ft_itoa(ft_status(0, false));
 	if (s[v->i] == '$' && s[v->i + 1] == '$')
 	{
 		v->tmp = ft_strdup("$$");
 		v->i++;
 	}
+	else if (s[v->i] == '$' && s[v->i + 1] == '?')
+	{
+		v->tmp = ft_strdup(nbr);
+		v->i++;
+	}
 	else
 		v->tmp = ft_substr(s, v->i, 1);
+	free(nbr);
 	v->join = ft_strjoin(v->join, v->tmp);
 	v->i++;
 }
@@ -95,7 +104,7 @@ void	ft_expand(t_token **token, t_env *env)
 			if (!tmp->content)
 				ft_remove_node(tmp, token);
 		}
-		else if (tmp->type == DOUBLE_QUOTES)
+		else if (tmp->type == DOUBLE_QUOTES || tmp->type == DOLLAR_WHY)
 			ft_expand_dollar(tmp, tmp->content, env);
 		tmp = next;
 	}
