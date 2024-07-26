@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_helper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 10:50:48 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/25 22:30:22 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:16:37 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_add_node(t_token *tmp, t_env *env)
 	node = ft_expand_var_sp(tmp->content, env);
 	if (!node)
 	{
-		(free(tmp->content), tmp->content = NULL);
+		(ft_status(0, true), free(tmp->content), tmp->content = NULL);
 		return ;
 	}
 	(free(tmp->content), tmp->content = ft_strdup(node[0]), i = 1);

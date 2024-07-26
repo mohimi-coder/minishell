@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:22:19 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/26 00:29:19 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/26 12:06:45 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ pid_t	child1_func(int	*end, t_list *list, char *env[], t_env **tenv)
 		cmd = get_path(list->cmd[0], env);
 		execve(cmd, list->cmd, env);
 		(write(2, cmd, ft_strlen(cmd)), perror("execve"));
-		exit(127);
+		exit(0);
 	}
 	if (!list->next)
 		return (id);
