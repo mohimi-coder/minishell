@@ -1,6 +1,6 @@
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g -fsanitize=address	
 
 FILE =				./builtins/export_helper.c \
 					./builtins/ft_builtins.c \

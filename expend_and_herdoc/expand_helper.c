@@ -6,7 +6,7 @@
 /*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 10:50:48 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/26 12:16:37 by mohimi           ###   ########.fr       */
+/*   Updated: 2024/07/27 22:10:59 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,17 @@
 char	**ft_expand_var_sp(char *str, t_env *env)
 {
 	int		i;
+	char	**s;
 
 	i = 0;
+	s = ft_split(env->val + 1, ' ');
+	if (!s)
+		return (NULL);
 	while (env)
 	{
 		if (!ft_strcmp(env->key, str + 1))
 			if (env->val)
-				return (ft_split(env->val + 1, ' '));
+				return (s);
 		env = env->next;
 	}
 	return (NULL);
