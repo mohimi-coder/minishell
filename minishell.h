@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohimi <mohimi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:02 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/24 19:35:45 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/26 12:50:53 by mohimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,6 @@ void	ft_env(t_env *env);
 void	ft_index(t_env *tmp, t_env *env);
 void	ft_echo(t_list *list);
 void	ft_update(char *str, t_env *env, t_env *new, char **s);
-int		check_empty(char **cmd);
 int		check_cmd(char *cmd);
 /*-------------------herdoc functions-------------------------------*/
 void	ft_putendl_fd(char *s, int fd);
