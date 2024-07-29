@@ -3,17 +3,17 @@
 🚀 This project was one of the most challenging yet rewarding experiences in the 42 curriculum. It involved handling numerous test cases and learning a wide range of topics, 
 from software architecture and system calls to team coordination and task distribution.
 
-⚡ Initially, building a shell that mimics Bash seemed intimidating. My prior knowledge of shells was limited to basic usage, and I had no idea how they worked internally.
+⚡ Initially, building a shell that mimics Bash seemed intimidating. Our prior knowledge of shells was limited to basic usage, and we had no idea how they worked internally.
 
-➥ Creating a shell from scratch was a significant challenge, but it highlighted one of the core aspects I love about the 42 pedagogy: 
+➥ Creating a shell from scratch was a significant challenge, but it highlighted one of the core aspects we love about the 42 pedagogy: 
 constantly facing new challenges and learning opportunities, from the early days of the Piscine (42 selection phase) up to now.
 
-💥 Minishell is a substantial project, especially for beginners, and it required careful planning and research to avoid major redesigns later—although I still ended up making significant changes.
+💥 Minishell is a substantial project, especially for beginners, and it required careful planning and research to avoid major redesigns later—although We still ended up making significant changes.
 
-👩🏻‍💻🧑🏻‍💻 Since this was a team project, I needed to find a partner. After forming a team of two, we started coordinating tasks and working together.
+👩🏻‍💻🧑🏻‍💻 Since this was a team project, We needed to find a partner. After forming a team of two, we started coordinating tasks and working together.
 
 🛑 The shell has two main parts: parsing (processing user input) and execution (running the parsed commands). 
-Through this project, I not only improved my technical skills but also learned valuable lessons in teamwork and project management.
+Through this project, We not only improved my technical skills but also learned valuable lessons in teamwork and project management.
 
 #</> Anyway, let’s have a project overview…
 
@@ -55,32 +55,30 @@ Through this project, I not only improved my technical skills but also learned v
     
     ➜ pwd
     
-#⚠And for the bonus part (optional, for me i din't do it)
+#⚠And for the bonus part (optional, for us we didn't do it)
 
     ➤ handle && and || with the parenthesis () for priority.
     
     ➤ handle * wildcards for the current working directory.
 
-#😵‍💫OMG! Where to start?! That was my reaction when I first read the assignment.
+#😵‍💫OMG! Where to start?! That was our reaction when we first read the assignment.
 
-After researching how Bash works, I discovered that its implementation is divided into two main parts: the front-end and the back-end.
+After researching how Bash works, We discovered that its implementation is divided into two main parts:
 
-#Front-End: 
 
-  🌟 Handles user input and interaction, such as commands and signals.
+  #🌟 Handles user input and interaction, such as commands and signals.
   
-#Back-End:
-  🌟 Manages the execution of commands.
+  #🌟 Manages the execution of commands.
   
-◼ In the front-end, we need to handle two main things: commands (user input as text) and signals (like Ctrl+C). 
+◼ In the first part, we need to handle two main things: commands (user input as text) and signals (like Ctrl+C). 
 
-◼ I decided to focus on handling user input first and postpone signal handling to avoid unnecessary complexity at the start.
+◼ We decided to focus on handling user input first and postpone signal handling to avoid unnecessary complexity at the start.
 
-✏️ My first task was to figure out how the shell processes user input. I realized there must be a systematic way to handle these lines. Many of my peers were tempted to hard-code the parsing and handle cases naively. 
+✏️ Our first task was to figure out how the shell processes user input. We realized there must be a systematic way to handle these lines. Many of our peers were tempted to hard-code the parsing and handle cases naively. 
 
-𑁍I felt the same temptation but chose to step out of my comfort zone and learn something new.
+𑁍We felt the same temptation but chose to step out of our comfort zone and learn something new.
 
-╰┈➤By taking this approach, I aimed to create a more robust and flexible shell, gaining deeper insights into how shells work and improving my programming skills along the way.
+╰┈➤By taking this approach, We aimed to create a more robust and flexible shell, gaining deeper insights into how shells work and improving our programming skills along the way.
 
 ![idea](https://github.com/user-attachments/assets/c151966d-2a1a-4213-98b0-b600c1481f69)
 
