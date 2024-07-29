@@ -37,6 +37,12 @@ OBJECT_FILE = $(FILE:.c=.o)
 
 NAME = minishell
 
+RED = \033[1;31m
+GREEN = \033[1;32m
+BLUE = \033[1;34m
+YELLOW = \033[1;33m
+RESET = \033[0m
+
 READLINE_INC = -I$(shell brew --prefix readline)/include
 
 READLINE_LIB = -L$(shell brew --prefix readline)/lib -lreadline
@@ -85,7 +91,7 @@ M::::::M               M::::::Mi::::::i  n::::n    n::::ni::::::iS::::::SSSSSS::
 M::::::M               M::::::Mi::::::i  n::::n    n::::ni::::::iS:::::::::::::::SS  h:::::h     h:::::h  ee:::::::::::::e  l::::::ll::::::l \n\
 MMMMMMMM               MMMMMMMMiiiiiiii  nnnnnn    nnnnnniiiiiiii SSSSSSSSSSSSSSS    hhhhhhh     hhhhhhh    eeeeeeeeeeeeee  llllllllllllllll \n\
                                                                                                                                              \n\
-                                                                                                                     $(RED)by: mohimi && zait-bel$(RESET) \n\
+                                                                                                                     $(YELLOW)by: mohimi && zait-bel $(RESET) \n\
                                                                                                                                              \n"
 
 .PHONY : clean
