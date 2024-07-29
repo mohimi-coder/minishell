@@ -1,3 +1,15 @@
+<!--HEADER-->
+<h1 align="center"> Minishell | 
+ <picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://cdn.simpleicons.org/42/white">
+  <img alt="42" width=40 align="center" src="https://cdn.simpleicons.org/42/Black">
+ </picture>
+ Cursus 
+  <img alt="Complete" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/complete.svg">
+</h1>
+<!--FINISH HEADER-->
+
+
 #minishell
 
 🚀 This project was one of the most challenging yet rewarding experiences in the 42 curriculum. It involved handling numerous test cases and learning a wide range of topics, 
