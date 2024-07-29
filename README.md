@@ -10,7 +10,7 @@ constantly facing new challenges and learning opportunities, from the early days
 
 💥 Minishell is a substantial project, especially for beginners, and it required careful planning and research to avoid major redesigns later—although I still ended up making significant changes.
 
-👨🏻‍💻👩🏽‍💻 Since this was a team project, I needed to find a partner. After forming a team of two, we started coordinating tasks and working together.
+👩🏻‍💻🧑🏻‍💻 Since this was a team project, I needed to find a partner. After forming a team of two, we started coordinating tasks and working together.
 
 🛑 The shell has two main parts: parsing (processing user input) and execution (running the parsed commands). 
 Through this project, I not only improved my technical skills but also learned valuable lessons in teamwork and project management.
