@@ -18,8 +18,6 @@ FILE =				./builtins/export_helper.c \
 					./expend_and_herdoc/herdoc.c \
 					./expend_and_herdoc/here_helper.c \
 					./expend_and_herdoc/utils_her.c \
-					./ft_split.c \
-					./libft_helper.c \
 					./lists/env_list.c \
 					./lists/fill_new_struct.c \
 					./lists/final_list.c \
@@ -28,10 +26,12 @@ FILE =				./builtins/export_helper.c \
 					./minishell.c \
 					./parcing/exit_status.c \
 					./parcing/parser.c \
+					./parcing/libft_helper.c \
 					./parcing/parser_utils.c \
 					./parcing/parser_utils2.c \
-					./signals.c \
-					./syntax_errors.c
+					./parcing/ft_split.c \
+					./parcing/signals.c \
+					./parcing/syntax_errors.c
 
 OBJECT_FILE = $(FILE:.c=.o)
 

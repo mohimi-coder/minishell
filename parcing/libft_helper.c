@@ -6,11 +6,11 @@
 /*   By: zait-bel <zait-bel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:21:21 by zait-bel          #+#    #+#             */
-/*   Updated: 2024/07/06 18:25:14 by zait-bel         ###   ########.fr       */
+/*   Updated: 2024/07/29 16:40:07 by zait-bel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 char	*ft_substr(char *s, int start, int len)
 {
