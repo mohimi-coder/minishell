@@ -15,17 +15,13 @@
 char	**ft_expand_var_sp(char *str, t_env *env)
 {
 	int		i;
-	char	**s;
 
 	i = 0;
-	s = ft_split(env->val + 1, ' ');
-	if (!s)
-		return (NULL);
 	while (env)
 	{
 		if (!ft_strcmp(env->key, str + 1))
 			if (env->val)
-				return (s);
+				return (ft_split(env->val + 1, ' '));
 		env = env->next;
 	}
 	return (NULL);
